@@ -1,13 +1,7 @@
 package ss.models.superclass;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,17 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @MappedSuperclass
-public abstract class Common implements Serializable {
+public class Person extends Common {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true)
-	private Long id;
+	@Column(name = "name", length = 50, nullable = false)
+	private String name;
 	
-	@Column(name = "status", nullable = false)
-	private boolean status;
 }

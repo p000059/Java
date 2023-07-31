@@ -1,28 +1,24 @@
-package ss.models.subclass;
-
-import ss.models.superclass.Common;
+package ss.models.subclass.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ss.models.superclass.Person;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "email")
-@Entity
-public class Email extends Common {
+@Table(name = "legal_person")
+public class LegalPerson extends Person {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "address", length = 150, unique = true, nullable = false)
-	private String address;
+	@Column(columnDefinition = "corporate_name", length = 200, nullable = false)
+	private String corporateName;
 }
