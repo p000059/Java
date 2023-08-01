@@ -47,9 +47,8 @@ public class DriverService implements IDriverService {
 
 	@Override
 	public boolean verifyDriver(String driver) {
-
 		
-		return false;
+		return driverRepository.existsByName(driver);
 	}
 
 	@Override
