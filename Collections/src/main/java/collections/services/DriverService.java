@@ -1,5 +1,6 @@
 package collections.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class DriverService implements IDriverService {
 	public Driver save(Driver driver) {
 		
 		return driverRepository.saveAndFlush(driver);		
+	}
+	
+	@Override
+	public List<Driver> getDrivers() {
+		
+		return driverRepository.findAll();
 	}
 
 	@Override
@@ -56,5 +63,4 @@ public class DriverService implements IDriverService {
 		
 		driverRepository.deleteById(id);		
 	}
-
 }

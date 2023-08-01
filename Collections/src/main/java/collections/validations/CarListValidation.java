@@ -1,4 +1,4 @@
-package collections.models.validations;
+package collections.validations;
 
 import java.util.List;
 import java.util.Optional;
@@ -79,7 +79,7 @@ public class CarListValidation implements ICarListValidation {
 		} else {
 
 			BeanUtils.copyProperties(carListDTO, carList);
-			carList.setId(carListOptional.get().getId());
+			carList.setId(carListOptional.get().getId()); //Keeps the same ID.
 
 			return iCarListService.save(carList);
 		}

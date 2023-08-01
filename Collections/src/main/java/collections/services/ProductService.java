@@ -1,5 +1,6 @@
 package collections.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class ProductService implements IProductService {
 		
 		return productRepository.save(product);
 	}
+	
+	@Override
+	public List<Product> getProducts() {
+		
+		return productRepository.findAll();
+	}
 
 	@Override
 	public Page<Product> getProducts(Pageable pageable) {
@@ -46,7 +53,7 @@ public class ProductService implements IProductService {
 	@Override
 	public boolean verifyProducts(String email) {
 		
-		return false;
+		return productRepository.existsByCode(email);
 	}
 
 	@Override
@@ -54,5 +61,4 @@ public class ProductService implements IProductService {
 		
 		productRepository.deleteById(id);
 	}
-
 }

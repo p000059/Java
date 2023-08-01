@@ -1,5 +1,6 @@
 package collections.models.interfaces.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import collections.models.subclass.entities.Product;
 public interface IProductService {
 
 	Product save(Product product);
+	
+	List<Product> getProducts();
 
 	Page<Product> getProducts(Pageable pageable);
 
