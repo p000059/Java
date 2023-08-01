@@ -1,12 +1,12 @@
 package ss.models.enums;
 
-public enum EnumChar {
+public enum CharEnum {
 
 	ACTIVE('1'), INACTIVE('0');
 
 	private char valueStatus;
 
-	EnumChar(char valueStatus) {
+	CharEnum(char valueStatus) {
 		this.valueStatus = valueStatus;
 	}
 

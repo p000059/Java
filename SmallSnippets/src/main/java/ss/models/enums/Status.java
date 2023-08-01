@@ -2,18 +2,17 @@ package ss.models.enums;
 
 public enum Status {
 
-	ACTIVE(1),
-	INACTIVE(0),
-	EMPTY(2);
+	ACTIVE(true),
+	INACTIVE(false);
 	
-	private int enumNumber;
+	private boolean value;
 	
-	Status(int enumNumber){
-		this.enumNumber = enumNumber;
+	Status(boolean value){
+		this.value = value;
 	}
 	
-	public int getStatus() {
+	public boolean getStatus() {
 		
-		return enumNumber;
+		return value;
 	}
 }
