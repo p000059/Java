@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import collections.models.interfaces.IDriverService;
+import collections.models.interfaces.services.IDriverService;
 import collections.models.subclass.entities.Driver;
 import collections.repository.DriverRepository;
 import jakarta.transaction.Transactional;
@@ -36,20 +36,19 @@ public class DriverService implements IDriverService {
 	@Override
 	public Driver updateDriver(Driver driver) {
 		
-		return driverRepository.save(driver);
+		return driverRepository.saveAndFlush(driver);
 	}
 
 	@Override
 	public Optional<Driver> findId(Long id) {
 		
-		Optional<Driver> driver = driverRepository.findById(id);
-		
-		return driver;
+		return driverRepository.findById(id);
 	}
 
 	@Override
 	public boolean verifyDriver(String driver) {
-		// TODO Auto-generated method stub
+
+		
 		return false;
 	}
 
