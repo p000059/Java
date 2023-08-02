@@ -9,43 +9,43 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import collections.models.interfaces.services.ICarListService;
-import collections.models.subclass.entities.CarList;
-import collections.repository.CarListRepository;
+import collections.models.interfaces.services.ICarService;
+import collections.models.subclass.entities.Car;
+import collections.repository.CarRepository;
 
 @Service
 @Primary
-public class CarListService implements ICarListService {
+public class CarService implements ICarService {
 
 	@Autowired
-	private CarListRepository carListRepository;
+	private CarRepository carListRepository;
 	
 	@Override
-	public CarList save(CarList carList) {
+	public Car save(Car carList) {
 		
 		return this.carListRepository.save(carList);
 	}
 	
 	@Override
-	public List<CarList> getCarLists() {
+	public List<Car> getCarLists() {
 		
 		return this.carListRepository.findAll();
 	}
 
 	@Override
-	public Page<CarList> getCarLists(Pageable pageable) {
+	public Page<Car> getCarLists(Pageable pageable) {
 		
 		return this.carListRepository.findAll(pageable);
 	}
 
 	@Override
-	public CarList updateCarList(CarList carList) {
+	public Car updateCarList(Car carList) {
 		
 		return this.carListRepository.saveAndFlush(carList);
 	}
 
 	@Override
-	public Optional<CarList> findId(Long id) {
+	public Optional<Car> findId(Long id) {
 		
 		return this.carListRepository.findById(id);
 	}

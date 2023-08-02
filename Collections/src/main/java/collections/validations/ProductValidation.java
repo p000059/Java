@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import collections.DTO.ProductDTO;
@@ -15,6 +16,7 @@ import collections.models.interfaces.validations.IProductValidation;
 import collections.models.subclass.entities.Product;
 import collections.models.subclass.nullables.ProductNull;
 
+@Service
 public class ProductValidation implements IProductValidation {
 
 	@Autowired
@@ -78,6 +80,7 @@ public class ProductValidation implements IProductValidation {
 
 			BeanUtils.copyProperties(productDTO, product);
 			product.setId(optionalProduct.get().getId()); // Keeps the same ID.
+			product.setCode(optionalProduct.get().getCode()); // Keeps the same code.
 
 			return iProductService.save(product);
 		}
@@ -96,7 +99,10 @@ public class ProductValidation implements IProductValidation {
 
 			Product product = new Product();
 
-			product.setDescription("Code Deleted");
+			product.setCode("Code Deleted");
+			product.setName("Name Deleted");
+			product.setType("Type Deleted");
+			product.setDescription("Product Deleted");
 			product.setStatus(false);
 
 			this.iProductService.deleteProducts(id);

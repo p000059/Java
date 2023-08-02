@@ -30,6 +30,6 @@ public class Product extends Common {
 	@Column(name = "description", length = 300)
 	private String description;
 	
-	@Column(name = "type", length = 20)
+	@Column(name = "type", length = 50)
 	private String type;
 }

@@ -2,9 +2,9 @@ package collections.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import collections.models.subclass.entities.CarList;
+import collections.models.subclass.entities.Car;
 
-public interface CarListRepository extends JpaRepository<CarList, Long> {
+public interface CarRepository extends JpaRepository<Car, Long> {
 
 	boolean existsByCar(String car);
 }

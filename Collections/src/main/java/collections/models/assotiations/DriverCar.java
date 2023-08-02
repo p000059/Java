@@ -2,7 +2,7 @@ package collections.models.assotiations;
 
 import java.io.Serializable;
 
-import collections.models.embedabble.DriverCarListFK;
+import collections.models.embedabble.DriverCarFK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -19,10 +19,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "driver_car_list")
 @Entity
-public class DriverCarList implements Serializable {
+public class DriverCar implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private DriverCarListFK driverCarListFK;
+	private DriverCarFK driverCarListFK;
 }

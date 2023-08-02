@@ -13,7 +13,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class CarListDTO {
+public class CarDTO {
 	
 	@Nonnull
 	@NonNull
