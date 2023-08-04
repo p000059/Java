@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "car_list")
 @Entity
-public class CarList extends Common {
+public class Car extends Common {
 
 	private static final long serialVersionUID = 1L;
 

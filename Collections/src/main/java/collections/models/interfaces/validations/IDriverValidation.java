@@ -11,9 +11,14 @@ import collections.models.subclass.entities.Driver;
 public interface IDriverValidation {
 
 	Driver validateDriver(DriverDTO driverDTO);
+
 	List<Driver> getValidateDriver();
+
 	Page<Driver> getValidateDriver(Pageable pageable);
+
 	Driver getValidateDriver(Long id);
+
 	Driver updateValidadeDriver(Long id, DriverDTO driverDTO);
+
 	Driver deleteValidadeDriver(Long id);
 }

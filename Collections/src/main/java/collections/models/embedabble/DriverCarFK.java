@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Embeddable
-public class DriverCarListFK implements Serializable {
+public class DriverCarFK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

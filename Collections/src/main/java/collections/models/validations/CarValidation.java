@@ -10,26 +10,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import collections.DTO.CarListDTO;
-import collections.models.interfaces.services.ICarListService;
+import collections.DTO.CarDTO;
+import collections.models.interfaces.services.ICarService;
 import collections.models.interfaces.validations.ICarListValidation;
-import collections.models.subclass.entities.CarList;
-import collections.models.subclass.nullables.CarListNull;
+import collections.models.subclass.entities.Car;
+import collections.models.subclass.nullables.CarNull;
 
 @Service
-public class CarListValidation implements ICarListValidation {
+public class CarValidation implements ICarListValidation {
 
 	@Autowired
-	private ICarListService iCarListService;
+	private ICarService iCarListService;
 
 	@Override
-	public CarList validateCarList(@Validated CarListDTO carListDTO) {
+	public Car validateCarList(@Validated CarDTO carListDTO) {
 
-		CarList carList = new CarList();
+		Car carList = new Car();
 
 		if (iCarListService.verifyCarList(carListDTO.getCar())) {
 
-			return new CarListNull();
+			return new CarNull();
 
 		} else {
 
@@ -39,25 +39,25 @@ public class CarListValidation implements ICarListValidation {
 	}
 
 	@Override
-	public List<CarList> getValidateCarLists() {
+	public List<Car> getValidateCarLists() {
 
 		return iCarListService.getCarLists();
 	}
 
 	@Override
-	public Page<CarList> getValidateCarLists(Pageable pageable) {
+	public Page<Car> getValidateCarLists(Pageable pageable) {
 
 		return iCarListService.getCarLists(pageable);
 	}
 
 	@Override
-	public CarList getValidateCarList(Long id) {
+	public Car getValidateCarList(Long id) {
 
-		Optional<CarList> optionalCarList = iCarListService.findId(id);
+		Optional<Car> optionalCarList = iCarListService.findId(id);
 
 		if (!optionalCarList.isPresent()) {
 
-			return new CarListNull();
+			return new CarNull();
 
 		} else {
 
@@ -66,15 +66,15 @@ public class CarListValidation implements ICarListValidation {
 	}
 
 	@Override
-	public CarList updateValidadeCarList(Long id, @Validated CarListDTO carListDTO) {
+	public Car updateValidadeCarList(Long id, @Validated CarDTO carListDTO) {
 
-		CarList carList = new CarList();
+		Car carList = new Car();
 
-		Optional<CarList> carListOptional = iCarListService.findId(id);
+		Optional<Car> carListOptional = iCarListService.findId(id);
 
 		if (!carListOptional.isPresent()) {
 
-			return new CarListNull();
+			return new CarNull();
 
 		} else {
 
@@ -86,17 +86,17 @@ public class CarListValidation implements ICarListValidation {
 	}
 
 	@Override
-	public CarList deleteValidadeCarList(Long id) {
+	public Car deleteValidadeCarList(Long id) {
 
-		Optional<CarList> carListOptional = iCarListService.findId(id);
+		Optional<Car> carListOptional = iCarListService.findId(id);
 
 		if (!carListOptional.isPresent()) {
 
-			return new CarListNull();
+			return new CarNull();
 
 		} else {
 
-			CarList carList = new CarList();
+			Car carList = new Car();
 
 			carList.setCar("Car Deleted");
 			carList.setStatus(false);

@@ -6,19 +6,19 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import collections.models.subclass.entities.CarList;
+import collections.models.subclass.entities.Car;
 
-public interface ICarListService {
+public interface ICarService {
 
-	CarList save(CarList carList);
+	Car save(Car carList);
 
-	List<CarList> getCarLists();
+	List<Car> getCarLists();
 	
-	Page<CarList> getCarLists(Pageable pageable);
+	Page<Car> getCarLists(Pageable pageable);
 
-	CarList updateCarList(CarList carList);
+	Car updateCarList(Car carList);
 
-	Optional<CarList> findId(Long id);
+	Optional<Car> findId(Long id);
 
 	boolean verifyCarList(String carList);
 
