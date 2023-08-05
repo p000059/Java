@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "car_list")
+@Table(name = "car")
 @Entity
 public class Car extends Common {
 

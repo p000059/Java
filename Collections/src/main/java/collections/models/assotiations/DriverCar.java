@@ -17,12 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "driver_car_list")
+@Table(name = "driver_car")
 @Entity
 public class DriverCar implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
-	private DriverCarFK driverCarFK;
+	
+	  @EmbeddedId 
+	  private DriverCarFK driverCarFK;	 
 }

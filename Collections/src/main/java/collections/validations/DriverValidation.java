@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import collections.DTO.DriverDTO;
@@ -12,6 +13,7 @@ import collections.models.interfaces.validations.IDriverValidation;
 import collections.models.subclass.entities.Driver;
 import collections.models.subclass.nullables.DriverNull;
 
+@Service
 public class DriverValidation implements IDriverValidation {
 
 	@Autowired
