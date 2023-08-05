@@ -49,7 +49,7 @@ public class CarValidation implements ICarValidation {
 
 			return this.icarService.findId(id).get(); // The .get() method return the class if it exists.
 
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 
 			return new CarNull();
 		}
@@ -67,7 +67,7 @@ public class CarValidation implements ICarValidation {
 
 			return this.icarService.save(car);
 
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 
 			return new CarNull();
 		}		
@@ -87,7 +87,7 @@ public class CarValidation implements ICarValidation {
 			
 			return car;
 			
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 
 			return new CarNull();
 		}
