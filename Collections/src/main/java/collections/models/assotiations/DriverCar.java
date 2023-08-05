@@ -24,5 +24,5 @@ public class DriverCar implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private DriverCarFK driverCarListFK;
+	private DriverCarFK driverCarFK;
 }

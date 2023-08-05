@@ -1,7 +1,5 @@
 package collections.models.interfaces.validations;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,8 +9,6 @@ import collections.models.subclass.entities.Driver;
 public interface IDriverValidation {
 
 	Driver validateDriver(DriverDTO driverDTO);
-
-	List<Driver> getValidateDriver();
 
 	Page<Driver> getValidateDriver(Pageable pageable);
 

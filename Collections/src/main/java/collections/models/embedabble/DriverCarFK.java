@@ -22,8 +22,8 @@ public class DriverCarFK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "driver_id")
-	private Long personID;
+	private Long driverId;
 	
-	@Column(name = "car_list_id")
-	private Long carListID;
+	@Column(name = "car_id")
+	private Long carId;
 }

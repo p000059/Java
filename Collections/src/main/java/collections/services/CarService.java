@@ -1,6 +1,5 @@
 package collections.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,47 +17,48 @@ import collections.repository.CarRepository;
 public class CarService implements ICarService {
 
 	@Autowired
-	private CarRepository carListRepository;
+	private CarRepository carRepository;
 	
 	@Override
-	public Car save(Car carList) {
+	public Car save(Car car) {
 		
-		return this.carListRepository.save(carList);
+		return this.carRepository.save(car);
 	}
 	
 	@Override
-	public List<Car> getCarLists() {
+	public Page<Car> getCar(Pageable pageable) {
 		
-		return this.carListRepository.findAll();
+		return this.carRepository.findAll(pageable);
 	}
 
 	@Override
-	public Page<Car> getCarLists(Pageable pageable) {
+	public Car updateCar(Car car) {
 		
-		return this.carListRepository.findAll(pageable);
-	}
-
-	@Override
-	public Car updateCarList(Car carList) {
-		
-		return this.carListRepository.saveAndFlush(carList);
+		return this.carRepository.saveAndFlush(car);
 	}
 
 	@Override
 	public Optional<Car> findId(Long id) {
 		
-		return this.carListRepository.findById(id);
+		try {
+			
+			return this.carRepository.findById(id);
+			
+		} catch (Exception e) {
+			
+			return Optional.empty();
+		}
 	}
 
 	@Override
-	public boolean verifyCarList(String carList) {
+	public boolean verifyCar(String car) {
 		
-		return carListRepository.existsByCar(carList);
+		return carRepository.existsByCar(car);
 	}
 
 	@Override
-	public void deleteCarList(Long id) {
+	public void deleteCar(Long id) {
 		
-		carListRepository.deleteById(id);
+		carRepository.deleteById(id);
 	}
 }
