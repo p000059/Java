@@ -8,6 +8,7 @@ import Persistence.models.entities.Address;
 import Persistence.models.entities.Person;
 import Persistence.repositories.AddressRepository;
 import Persistence.repositories.PersonRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class PersonAddressService {
@@ -19,15 +20,17 @@ public class PersonAddressService {
 	private PersonRepository personRepository;
 	
 	
+	@Transactional
 	public void savePersonAddress(Person person, Address address) {
 		
-		Long addressId = this.addressRepository.save(address).getId();
-		Long personId = this.personRepository.save(person).getId();
 		
-		PersonAddress personAddress = new PersonAddress();
-		
-		personAddress.setAddressId(addressId);
-		personAddress.setPersonId(personId);
-		
+		  Long addressId = this.addressRepository.save(address).getId(); 
+		  Long personId = this.personRepository.save(person).getId();
+		  
+		  PersonAddress personAddress = new PersonAddress();
+		  
+		  personAddress.setAddressId(addressId); personAddress.setPersonId(personId);
+		 
+		 
 	}
 }
