@@ -55,7 +55,7 @@ public class DriverValidation implements IDriverValidation {
 	}
 
 	@Override
-	public Driver updateValidadeDriver(Long id, DriverDTO driverDTO) {
+	public Driver updateValidadeDriver(@Validated Long id, DriverDTO driverDTO) {
 		
 		try {
 			

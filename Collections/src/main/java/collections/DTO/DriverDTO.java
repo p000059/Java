@@ -15,8 +15,6 @@ import lombok.NonNull;
 @EqualsAndHashCode
 public class DriverDTO {
 	
-	private Long id;
-	
 	@Nonnull
 	@NonNull
 	private String name;
