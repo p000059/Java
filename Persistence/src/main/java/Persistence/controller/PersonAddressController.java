@@ -20,10 +20,9 @@ public class PersonAddressController {
 	private PersonAddressService personAddressService;
 	
 	@PostMapping(value = "/savepersonaddress")
-	public void savePersonAddress(@RequestBody Person person, @RequestBody Address address) {
+	public void savePersonAddress(@RequestBody Person person, Address address) {
 		
-		this.personAddressService.savePersonAddress(person, address);
-		
+		this.personAddressService.savePersonAddress(person, address);		
 		
 	}
 }

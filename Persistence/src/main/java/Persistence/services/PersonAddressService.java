@@ -7,6 +7,7 @@ import Persistence.models.associations.PersonAddress;
 import Persistence.models.entities.Address;
 import Persistence.models.entities.Person;
 import Persistence.repositories.AddressRepository;
+import Persistence.repositories.PersonAddressRepository;
 import Persistence.repositories.PersonRepository;
 
 @Service
@@ -18,6 +19,8 @@ public class PersonAddressService {
 	@Autowired
 	private PersonRepository personRepository;
 	
+	@Autowired
+	private PersonAddressRepository personAddressRepository;
 	
 	public void savePersonAddress(Person person, Address address) {
 		
@@ -29,5 +32,6 @@ public class PersonAddressService {
 		personAddress.setAddressId(addressId);
 		personAddress.setPersonId(personId);
 		
+		personAddressRepository.save(personAddress);
 	}
 }
