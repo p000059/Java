@@ -2,8 +2,8 @@ package classnull.services;
 
 import org.springframework.stereotype.Service;
 
+import classnull.models.Nulls.CarNull;
 import classnull.models.subclass.Car;
-import classnull.models.subclass.CarNull;
 import classnull.models.subclass.CookieFactory;
 import jakarta.servlet.http.HttpServletRequest;
 

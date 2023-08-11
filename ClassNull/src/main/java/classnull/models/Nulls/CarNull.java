@@ -1,4 +1,6 @@
-package classnull.models.subclass;
+package classnull.models.Nulls;
+
+import classnull.models.subclass.Car;
 
 public class CarNull extends Car {
 

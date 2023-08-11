@@ -1,12 +1,9 @@
-package Persistence.models.associations;
+package Persistence.models.Embbedable;
 
 import java.io.Serializable;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,21 +11,18 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
-@Table(name = "person_address")
-@Entity
-public class PersonAddress implements Serializable {
+@Embeddable
+public class PersonAddressFK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
+	
 	@Column(name = "person_id")
 	private Long personId;
 	
-	@Id
 	@Column(name = "address_id")
 	private Long addressId;
 }

@@ -3,9 +3,10 @@ package Persistence.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Persistence.models.associations.PersonAddress;
+import Persistence.models.Embbedable.PersonAddressFK;
 import Persistence.models.entities.Address;
 import Persistence.models.entities.Person;
+import Persistence.models.intermediate.PersonAddress;
 import Persistence.repositories.AddressRepository;
 import Persistence.repositories.PersonAddressRepository;
 import Persistence.repositories.PersonRepository;
@@ -16,28 +17,28 @@ public class PersonAddressService {
 
 	@Autowired
 	private AddressRepository addressRepository;
-	
+
 	@Autowired
 	private PersonRepository personRepository;
-	
+
 	@Autowired
 	private PersonAddressRepository personAddressRepository;
-	
+
 	@Transactional
 	public void savePersonAddress(Person person, Address address) {
+
+		Long addressId = this.addressRepository.save(address).getId();
+		Long personId = this.personRepository.save(person).getId();
+
+		PersonAddressFK personAddressFK = new PersonAddressFK();
+		personAddressFK.setAddressId(addressId);
+		personAddressFK.setPersonId(personId);
 		
+		PersonAddress personAddress = new PersonAddress();
+		personAddress.setPersonAddressFK(personAddressFK);
+
 		
-<<<<<<< HEAD
-		personAddressRepository.save(personAddress);
-=======
-		  Long addressId = this.addressRepository.save(address).getId(); 
-		  Long personId = this.personRepository.save(person).getId();
-		  
-		  PersonAddress personAddress = new PersonAddress();
-		  
-		  personAddress.setAddressId(addressId); personAddress.setPersonId(personId);
-		 
-		 
->>>>>>> cf5a132cc2113a1c99f632ec0446e211727efa09
+		this.personAddressRepository.save(personAddress);
+
 	}
 }
