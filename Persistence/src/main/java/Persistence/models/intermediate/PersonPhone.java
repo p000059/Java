@@ -2,7 +2,7 @@ package Persistence.models.intermediate;
 
 import java.io.Serializable;
 
-import Persistence.models.Embbedable.PersonAddressId;
+import Persistence.models.Embbedable.PersonPhoneId;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,12 +19,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "person_address")
+@Table(name = "person_phone")
 @Entity
-@IdClass(PersonAddressId.class)
-public class PersonAddress implements Serializable {
+@IdClass(PersonPhoneId.class)
+public class PersonPhone implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,6 +33,6 @@ public class PersonAddress implements Serializable {
 	private Long personId;
 
 	@Id
-	@Column(name = "address_id")
-	private Long addressId;
+	@Column(name = "phone_id")
+	private Long phoneId;
 }

@@ -3,7 +3,6 @@ package Persistence.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Persistence.models.Embbedable.PersonAddressFK;
 import Persistence.models.entities.Address;
 import Persistence.models.entities.Person;
 import Persistence.models.intermediate.PersonAddress;
@@ -25,20 +24,15 @@ public class PersonAddressService {
 	private PersonAddressRepository personAddressRepository;
 
 	@Transactional
-	public void savePersonAddress(Person person, Address address) {
-
-		Long addressId = this.addressRepository.save(address).getId();
-		Long personId = this.personRepository.save(person).getId();
-
-		PersonAddressFK personAddressFK = new PersonAddressFK();
-		personAddressFK.setAddressId(addressId);
-		personAddressFK.setPersonId(personId);
+	public PersonAddress savePersonAddress(Person person, Address address) {
 		
-		PersonAddress personAddress = new PersonAddress();
-		personAddress.setPersonAddressFK(personAddressFK);
-
-		
-		this.personAddressRepository.save(personAddress);
-
+		  Long addressId = this.addressRepository.save(address).getId(); 
+		  Long personId = this.personRepository.save(person).getId();
+		  
+		  PersonAddress personAddress = new PersonAddress();
+		  personAddress.setAddressId(addressId);
+		  personAddress.setPersonId(personId);
+		  
+		  return this.personAddressRepository.save(personAddress);
 	}
 }

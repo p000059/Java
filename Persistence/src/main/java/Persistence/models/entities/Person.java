@@ -3,6 +3,7 @@ package Persistence.models.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,14 +38,19 @@ public class Person implements Serializable {
 	@Column(name = "id", unique = true)
 	private Long id;
 
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
+	@Nonnull
 	private String name;
+	
+	@Column(name = "status", nullable = false)
+	@Nonnull
+	private boolean status;
 
 	@ManyToMany(targetEntity = Address.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "person_address", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id"))
 	private List<Address> adresses;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = Phone.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "person_phone", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "phone_id", referencedColumnName = "id"))
 	private List<Phone> phones;
 }
