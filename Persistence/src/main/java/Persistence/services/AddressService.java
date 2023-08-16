@@ -43,16 +43,17 @@ public class AddressService implements IAddressService {
 
 		try {
 			
-			return addressRepository.save(address);
+			return address instanceof Address ? this.addressRepository.save(address) : new Address();
 			
 		} catch (IllegalArgumentException e) {
 
-			return new Address().builder().address("Not Save").status(false).build();
+			return new AddressNull().builder().address("Not Save").build();
 		}
 		
 	}
 
-	public List<Address> getAddress() {
+	@Override
+	public List<Address> getAddresses() {
 
 		return addressRepository.findAll();
 	}
@@ -205,5 +206,21 @@ public class AddressService implements IAddressService {
 			return new AddressNull();
 		}
 	}
+
+	@Override
+	public Address updateAddress(Address address) {
+		
+		try {
+			
+			Address entityAddress = this.addressRepository.queryAddressById(address.getId());
+			
+			return address.equals(entityAddress) ? this.addressRepository.saveAndFlush(address) : new Address();			
+			
+		} catch (IllegalArgumentException e) {
+			
+			return new AddressNull();
+		}
+		
+	}	
 	
 }
