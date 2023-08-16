@@ -2,6 +2,8 @@ package Persistence.models.Embbedable;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +15,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Embeddable
 public class PersonAddressId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name = "person_id")
 	private Long personId;
 	
+	@Column(name = "address_id")
 	private Long addressId;
 }

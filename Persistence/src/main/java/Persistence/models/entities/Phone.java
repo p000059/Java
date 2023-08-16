@@ -37,6 +37,9 @@ public class Phone implements Serializable {
 	@Column(name = "number", length = 9, nullable = false)
 	private String number;
 	
+	@Column(name = "status", nullable = false)
+	private Boolean status;
+	
 	@ManyToOne(targetEntity = Person.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	//@JoinTable(name = "person_phone", joinColumns = @JoinColumn(name = "phone_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"))
 	private Person person;

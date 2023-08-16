@@ -36,13 +36,13 @@ public class Address implements Serializable {
 	@Column(name = "id", unique = true)
 	private Long id;
 	
-	@Column(name = "address", nullable = false)
+	@Column(name = "address", length = 50, nullable = false)
 	@Nonnull
 	private String address;
 	
 	@Column(name = "status", nullable = false)
 	@Nonnull
-	private boolean status;
+	private Boolean status;
 
 	@ManyToMany(targetEntity = Person.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "adresses")
 	private List<Person> persons;
