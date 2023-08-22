@@ -44,7 +44,7 @@ public class Person implements Serializable {
 	
 	@Column(name = "status", nullable = false)
 	@Nonnull
-	private boolean status;
+	private Boolean status;
 
 	@ManyToMany(targetEntity = Address.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "person_address", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id"))

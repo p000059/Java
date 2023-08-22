@@ -50,7 +50,7 @@ public class PersonPhoneController {
 		
 		Person person = new Person();
 		person.setName(personPhoneDTO.getPerson().getName());
-		person.setStatus(personPhoneDTO.getPerson().isStatus());
+		person.setStatus(personPhoneDTO.getPerson().getStatus());
 		
 		Phone phone = new Phone();
 		phone.setNumber(personPhoneDTO.getPhone().getNumber());

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Persistence.models.entities.Person;
-import Persistence.services.PersonService;
+import Persistence.services.interfaces.IPersonService;
 
 @RequestMapping(value = "/api")
 @RestController
@@ -19,17 +19,17 @@ import Persistence.services.PersonService;
 public class PersonController {
 
 	@Autowired
-	private PersonService personService;
+	private IPersonService iPersonService;
 	
 	@PostMapping(value = "/saveperson")
 	public Person savePerson(@RequestBody Person person) {
 		
-		return personService.savePerson(person);
+		return iPersonService.save(person);
 	}
 	
 	@GetMapping(value = "/getpersons")
 	public List<Person> getPersons(){
 		
-		return personService.getPerson();
+		return iPersonService.listPerson();
 	}	
 }

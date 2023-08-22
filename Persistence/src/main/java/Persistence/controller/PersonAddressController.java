@@ -45,12 +45,12 @@ public class PersonAddressController {
 		return ResponseEntity.status(HttpStatus.OK).body(this.personAddressService.savePersonAddress(person, address));
 	}
 
-	@PostMapping(value = "/savepersonaddressto")
+	@PostMapping(value = "/savepersonaddressdto")
 	public ResponseEntity<PersonAddress> savePersonAddressDTO(@RequestBody PersonAddressDTO personAddressDTO){
 		
 		Person person = new Person();
 		person.setName(personAddressDTO.getPerson().getName());
-		person.setStatus(personAddressDTO.getPerson().isStatus());
+		person.setStatus(personAddressDTO.getPerson().getStatus());
 		
 		Address address = new Address();
 		address.setAddress(personAddressDTO.getAddress().getAddress());
