@@ -26,12 +26,14 @@ public class PhoneController {
 	@PostMapping(value = "/savephone")
 	public ResponseEntity<Phone> savePhone(@RequestBody Phone phone){
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(this.phoneService.savePhone(phone));
+		//return ResponseEntity.status(HttpStatus.CREATED).body(this.phoneService.savePhone(phone));
+		return null;
 	}
 	
 	@GetMapping(value = "/getphones")
 	public ResponseEntity<List<Phone>> getPhones(){
 		
-		return ResponseEntity.status(HttpStatus.FOUND).body(this.phoneService.getPhones());
+		//return ResponseEntity.status(HttpStatus.FOUND).body(this.phoneService.getPhones());
+		return null;
 	}
 }

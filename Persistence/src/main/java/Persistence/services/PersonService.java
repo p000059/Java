@@ -19,24 +19,32 @@ public class PersonService implements IPersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
-
-	public List<Person> getPerson() {
-
-		return personRepository.findAll();
-	}
-
+	
 	@Override
-	@Transactional
 	@SuppressWarnings("static-access")
-	public Person save(Person person) {
+	public Person getPerson(Long id) {
 
 		try {
 
-			return person.equals(null) ? new Person().builder().name("invalid object, check data").build()
-					: this.personRepository.save(person);
+			return id == 0 ? new Person().builder().name("not found").build()
+					: this.personRepository.queryPersonById(id);
 
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 
+			return new PersonNull();
+		}
+	}
+
+	@SuppressWarnings("static-access")
+	public Person getPerson(String name) {
+
+		try {
+
+			return personRepository.existsByName(name) ? this.personRepository.queryPersonByName(name)
+					: new Person().builder().name("not found").build();
+
+		} catch (IllegalArgumentException e) {
+			
 			return new PersonNull();
 		}
 	}
@@ -70,6 +78,22 @@ public class PersonService implements IPersonService {
 	@Override
 	@Transactional
 	@SuppressWarnings("static-access")
+	public Person save(Person person) {
+
+		try {
+
+			return person.equals(null) ? new Person().builder().name("invalid object, check data").build()
+					: this.personRepository.save(person);
+
+		} catch (Exception e) {
+
+			return new PersonNull();
+		}
+	}
+
+	@Override
+	@Transactional
+	@SuppressWarnings("static-access")
 	public Person update(Long id, Person person) {
 
 		try {
@@ -89,20 +113,20 @@ public class PersonService implements IPersonService {
 	public Person delete(Person person) {
 
 		try {
-			
-			if(this.personRepository.queryObjectPersonById(person.getId())) {
-				
+
+			if (this.personRepository.queryObjectPersonById(person.getId())) {
+
 				this.personRepository.delete(person);
-				
+
 				return new Person().builder().name("Person Deleted").build();
 			} else {
-				
+
 				return new Person().builder().name("not deleted").build();
 			}
-			
+
 		} catch (Exception e) {
 
-			return new PersonNull();			
+			return new PersonNull();
 		}
 	}
 

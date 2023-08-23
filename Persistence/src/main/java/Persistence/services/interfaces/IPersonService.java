@@ -10,7 +10,16 @@ import Persistence.models.entities.Person;
 public interface IPersonService {
 
 	/**
-	 * Save an Address object.
+	 * Search an Person object.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return the Person object registered.
+	 * @throws {@link PersonNull} if object are null.
+	 */
+	Person getPerson(Long id);
+	
+	/**
+	 * Save an Person object.
 	 *
 	 * @param object Person must not be {@literal null}.
 	 * @return the Person object registered.
@@ -36,7 +45,7 @@ public interface IPersonService {
 	Page<Person> listPerson(Pageable pageable);
 	
 	/**
-	 * Update an Address object.
+	 * Update an Person object.
 	 *
 	 * @param id must not be {@literal null}.
 	 * @param object Person must not be {@literal null}.
@@ -46,7 +55,7 @@ public interface IPersonService {
 	Person update(Long id, Person person);
 	
 	/**
-	 * Delete an Address object.
+	 * Delete an Person object.
 	 *
 	 * @param object Person must not be {@literal null}.
 	 * @return the Person object deleted.
