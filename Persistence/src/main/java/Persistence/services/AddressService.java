@@ -3,6 +3,8 @@ package Persistence.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Persistence.models.classnull.AddressNull;
@@ -210,6 +212,7 @@ public class AddressService implements IAddressService {
 	}
 	
 	@Override
+	@Transactional
 	public Address updateAddress(Address address) {
 		
 		try {
@@ -227,6 +230,7 @@ public class AddressService implements IAddressService {
 	}
 
 	@Override
+	@Transactional
 	public Address updateAddress(Long id, Address address) {
 		
 		try {
@@ -239,6 +243,19 @@ public class AddressService implements IAddressService {
 			
 			return new AddressNull();
 		}
+	}
+
+	@Override
+	public Page<Address> getAddresses(Pageable pageable) {
+		
+		try {
+			
+			return this.addressRepository.findAll(pageable);
+			
+		} catch (Exception e) {
+
+			return Page.empty();
+		}		
 	}	
 	
 }

@@ -1,14 +1,13 @@
 package Persistence.validation;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 
 import Persistence.DTO.PhoneDTO;
-import Persistence.models.classnull.PersonNull;
 import Persistence.models.classnull.PhoneNull;
-import Persistence.models.entities.Person;
 import Persistence.models.entities.Phone;
 import Persistence.repositories.PhoneRepository;
 import Persistence.services.interfaces.IPhoneService;
@@ -57,8 +56,19 @@ public class PhoneValidation implements IPhoneValidation {
 
 	@Override
 	public Phone save(PhoneDTO phoneDTO) {
-		// TODO Auto-generated method stub
-		return null;
+
+		try {
+
+			Phone objectPhone = new Phone();
+
+			BeanUtils.copyProperties(phoneDTO, objectPhone);
+
+			return this.iPhoneService.save(objectPhone);
+
+		} catch (IllegalArgumentException e) {
+
+			return new PhoneNull();
+		}
 	}
 
 	@Override
@@ -69,14 +79,38 @@ public class PhoneValidation implements IPhoneValidation {
 
 	@Override
 	public Page<Phone> pages(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+
+		try {
+
+			return this.iPhoneService.listPhone(pageable);
+
+		} catch (NullPointerException e) {
+
+			return Page.empty();
+		}
 	}
 
 	@Override
+	@SuppressWarnings("static-access")
 	public Phone delete(PhoneDTO phoneDTO) {
-		// TODO Auto-generated method stub
-		return null;
+
+		try {
+
+			Phone objectPhone = new Phone();
+
+			BeanUtils.copyProperties(phoneDTO, objectPhone);
+
+			return this.phoneRepository.existsByNumber(phoneDTO.getNumber()) ? this.iPhoneService.delete(objectPhone)
+					: new Phone().builder().number("invalid object").build();
+
+		} catch (IllegalArgumentException e) {
+
+			return new PhoneNull();
+			
+		} catch (NullPointerException e) {
+			
+			return new PhoneNull();
+		}
 	}
 
 }

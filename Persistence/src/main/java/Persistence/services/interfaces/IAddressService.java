@@ -2,6 +2,9 @@ package Persistence.services.interfaces;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import Persistence.models.entities.Address;
 
 public interface IAddressService {
@@ -36,6 +39,14 @@ public interface IAddressService {
 	 */
 	List<Address> getAddresses();
 
+	/**
+	 * Get a pagination of addresses.
+	 * @param pageable must not be {@literal null}
+	 * @return Returns a list of Address.
+	 * @throws {@link Page.empty()} if @param is null.
+	 */
+	Page<Address> getAddresses(Pageable pageable);
+	
 	/**
 	 * Search address by Id.
 	 * 
