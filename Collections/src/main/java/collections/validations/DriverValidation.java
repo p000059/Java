@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import collections.DTO.DriverDTO;
-import collections.models.interfaces.services.IDriverService;
-import collections.models.interfaces.validations.IDriverValidation;
 import collections.models.subclass.entities.Driver;
 import collections.models.subclass.nullables.DriverNull;
+import collections.services.interfaces.IDriverService;
+import collections.validations.interfaces.IDriverValidation;
 
 @Service
 public class DriverValidation implements IDriverValidation {

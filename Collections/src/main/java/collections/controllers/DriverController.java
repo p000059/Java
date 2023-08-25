@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import collections.DTO.DriverDTO;
-import collections.models.interfaces.validations.IDriverValidation;
 import collections.models.subclass.entities.Driver;
+import collections.validations.interfaces.IDriverValidation;
 
 @RequestMapping(value = "/api")
 @RestController

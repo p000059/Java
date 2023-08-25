@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import collections.DTO.CarDTO;
-import collections.models.interfaces.services.ICarService;
-import collections.models.interfaces.validations.ICarValidation;
 import collections.models.subclass.entities.Car;
 import collections.models.subclass.nullables.CarNull;
+import collections.services.interfaces.ICarService;
+import collections.validations.interfaces.ICarValidation;
 
 @Service
 public class CarValidation implements ICarValidation {

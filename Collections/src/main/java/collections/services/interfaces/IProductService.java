@@ -1,4 +1,4 @@
-package collections.models.interfaces.services;
+package collections.services.interfaces;
 
 import java.util.Optional;
 

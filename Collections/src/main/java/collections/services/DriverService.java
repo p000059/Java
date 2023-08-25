@@ -8,9 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import collections.models.interfaces.services.IDriverService;
 import collections.models.subclass.entities.Driver;
-import collections.repository.DriverRepository;
+import collections.repositories.DriverRepository;
+import collections.services.interfaces.IDriverService;
 import jakarta.transaction.Transactional;
 
 @Service

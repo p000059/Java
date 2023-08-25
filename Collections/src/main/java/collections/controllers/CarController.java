@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import collections.DTO.CarDTO;
-import collections.models.interfaces.validations.ICarValidation;
 import collections.models.subclass.entities.Car;
+import collections.validations.interfaces.ICarValidation;
 
 @RequestMapping(value = "/api")
 @RestController

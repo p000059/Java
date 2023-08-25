@@ -1,4 +1,4 @@
-package collections.models.interfaces.validations;
+package collections.validations.interfaces;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

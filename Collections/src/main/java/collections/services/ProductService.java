@@ -8,9 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import collections.models.interfaces.services.IProductService;
 import collections.models.subclass.entities.Product;
-import collections.repository.ProductRepository;
+import collections.repositories.ProductRepository;
+import collections.services.interfaces.IProductService;
 
 @Service
 @Primary
