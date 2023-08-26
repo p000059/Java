@@ -20,26 +20,40 @@ public class CarValidation implements ICarValidation {
 	private ICarService icarService;
 
 	@Override
+	@SuppressWarnings("static-access")
 	public Car validateCar(@Validated CarDTO carDTO) {
 
-
-		if (icarService.verifyCar(carDTO.getCar())) {
-
-			return new CarNull();
-
-		} else {
+		try {
 			
-			Car car = new Car();
-
-			BeanUtils.copyProperties(carDTO, car);
-			return this.icarService.save(car);
+			if (icarService.verifyCar(carDTO.getCar())) {
+				
+				return new Car().builder().car("not validated").build();
+				
+			} else {
+				
+				Car car = new Car();
+				
+				BeanUtils.copyProperties(carDTO, car);
+				return this.icarService.save(car);
+			}			
+			
+		} catch (Exception e) {
+			
+			return new CarNull();
 		}
 	}
 
 	@Override
 	public Page<Car> getValidateCar(Pageable pageable) {
 
-		return this.icarService.getCar(pageable);
+		try {
+			
+			return this.icarService.getCar(pageable);			
+			
+		} catch (Exception e) {
+			
+			return Page.empty();
+		}		
 	}
 
 	@Override
@@ -56,21 +70,34 @@ public class CarValidation implements ICarValidation {
 	}
 
 	@Override
-	public Car updateValidadeCar(Long id, @Validated CarDTO carDTO) {
+	@SuppressWarnings("static-access")
+	public Car updateValidadeCar(@Validated Long id, @Validated CarDTO carDTO) {
 
 		try {
 
-			Car car = new Car();
-
-			BeanUtils.copyProperties(carDTO, car);
-			car.setId(icarService.findId(id).get().getId()); // Keep the same ID for the update.
-
-			return this.icarService.save(car);
+			if(carDTO instanceof CarDTO && id != 0) {
+				
+				Car car = new Car();
+				
+				BeanUtils.copyProperties(carDTO, car);
+				car.setId(icarService.findId(id).get().getId()); // Keep the same ID for the update.
+				
+				return this.icarService.save(car);
+				
+			} else {
+				
+				return new Car().builder().car("object invalid").build();
+			}
+			
 
 		} catch (IllegalArgumentException e) {
 
 			return new CarNull();
-		}		
+			
+		} catch (NullPointerException e) {
+			
+			return new CarNull();
+		}
 	}
 
 	@Override
@@ -78,7 +105,7 @@ public class CarValidation implements ICarValidation {
 
 		try {
 			
-			Car car = new Car();;
+			Car car = new Car();
 			
 			car.setCar("Car Deleted");
 			car.setStatus(false);

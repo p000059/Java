@@ -10,6 +10,15 @@ import collections.models.subclass.entities.Car;
 public interface ICarService {
 
 	/**
+	 * Verify if string car is null.
+	 *
+	 * @param car must not be {@literal null}.
+	 * @return true if car exists.
+	 * @throws {@link false} if car does not exist.
+	 */
+	Boolean verifyCar(String carList);
+	
+	/**
 	 * Save an Address object.
 	 *
 	 * @param car must not be {@literal null}.
@@ -19,6 +28,24 @@ public interface ICarService {
 	 */
 	Car save(Car car);
 
+	/**
+	 * Get object car by id.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return the registered {@link Car} object.
+	 * @throws {@link CarNull} if car and status are null.
+	 */
+	Car getCar(Long id);
+	
+	/**
+	 * Get object car by String car.
+	 *
+	 * @param car must not be {@literal null}.
+	 * @return the registered {@link Car} object.
+	 * @throws {@link CarNull} if car and status are null.
+	 */
+	Car getCar(Long id, String car);
+	
 	/**
 	 * Get car class pages.
 	 *
@@ -65,10 +92,22 @@ public interface ICarService {
 	 */
 	Car updateCar(Long id, Car car);
 	
+	/**
+	 * Search object Car by id.
+	 *
+	 * @param id must not be {@literal null}.	 
+	 * @return {@link Optional<Car>}.
+	 * @throws {@link Optional.Empty} if id is null.
+	 */
 	Optional<Car> findId(Long id);
-
-	boolean verifyCar(String carList);
-
-	void deleteCar(Long id);
+	
+	/**
+	 * Delete object Car by id.
+	 *
+	 * @param id must not be {@literal null}.	 
+	 * @return {@link Car} class with confirmation message.
+	 * @throws {@link CarNull} if id is null.
+	 */
+	Car deleteCar(Long id);
 
 }

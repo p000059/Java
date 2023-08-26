@@ -27,13 +27,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	
 	/**
-	 * Query object by "name".
+	 * Query object by "code".
 	 * 
-	 * @param name must not be {@literal null}
+	 * @param code must not be {@literal null}
 	 * @return a Product object.
 	 */
-	@Query("SELECT p FROM Product p WHERE p.name = :name")
-	Product queryProductByName(@Param("name") String name);
+	@Query("SELECT p FROM Product p WHERE p.code = :code")
+	Product queryProductByCode(@Param("code") String code);
 	
 	
 	/**
@@ -47,13 +47,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	
 	/**
-	 * Query by "id", "name" and "status".
+	 * Query by "id", "code" and "status".
 	 * 
 	 * @param id must not be {@literal null}
-	 * @param name must not be {@literal null}
+	 * @param code must not be {@literal null}
 	 * @param status must not be {@literal null}
 	 * @return a Product object.
 	 */
-	@Query("SELECT a FROM Product a WHERE a.id = :id AND a.name = :name AND a.status = :status")
-	Product queryProductByIdNameStatus(@Param("id") Long id, @Param("name") String name, @Param("status") Boolean status);
+	@Query("SELECT a FROM Product a WHERE a.id = :id AND a.code = :name AND a.status = :status")
+	Product queryProductByIdCodeStatus(@Param("id") Long id, @Param("code") String code, @Param("status") Boolean status);
 }

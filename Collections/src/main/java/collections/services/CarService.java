@@ -42,6 +42,40 @@ public class CarService implements ICarService {
 	}
 
 	@Override
+	@SuppressWarnings("static-access")
+	public Car getCar(Long id) {
+		
+		try {
+			
+			return this.carRepository.existsById(id) ? this.carRepository.queryCarById(id) : new Car().builder().car("not found").build();
+			
+		} catch (IllegalArgumentException e) {
+			
+			return new CarNull();
+			
+		} catch (NullPointerException e) {
+			
+			return new CarNull();
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public Car getCar(Long id, String car) {
+		
+		try {
+			
+			Car objectCarName = this.carRepository.queryCarByName(car);
+			Car objectCarId = this.carRepository.queryCarById(id);
+			
+			return objectCarName.getId() == objectCarId.getId() ? objectCarName : new Car().builder().car("not found").build();
+			
+		} catch (Exception e) {
+
+			return new CarNull();
+		}
+	}
+
+	@Override
 	public Page<Car> getCar(Pageable pageable) {
 
 		try {
@@ -134,14 +168,49 @@ public class CarService implements ICarService {
 	}
 
 	@Override
-	public boolean verifyCar(String car) {
+	public Boolean verifyCar(String car) {
 
-		return carRepository.existsByCar(car);
+		try {
+			
+			return carRepository.existsByCar(car);
+			
+		} catch (IllegalArgumentException e) {
+			
+			return false;
+			
+		} catch (NullPointerException e) {
+			
+			return false;
+		}
+		
 	}
 
 	@Override
-	public void deleteCar(Long id) {
+	@Transactional
+	@SuppressWarnings("static-access")
+	public Car deleteCar(Long id) {
 
-		carRepository.deleteById(id);
+		try {
+			
+			if(this.carRepository.existsById(id)) {
+				
+				this.carRepository.deleteById(id);
+				
+				return new Car().builder().car("Object Delected").build();
+				
+			} else {
+				
+				return new Car().builder().car("not deleted").build();
+			}
+			
+			
+		} catch (IllegalArgumentException e) {
+			
+			return new CarNull();
+			
+		} catch (NullPointerException e) {
+			
+			return new CarNull();
+		}
 	}
 }

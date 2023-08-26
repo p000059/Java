@@ -9,7 +9,7 @@ import collections.models.subclass.entities.Car;
 public interface CarRepository extends JpaRepository<Car, Long> {
 
 	/**
-	 * Query object by "id".
+	 * Query object Car by "id".
 	 * 
 	 * @param id must not be {@literal null}
 	 * @return true if found.
