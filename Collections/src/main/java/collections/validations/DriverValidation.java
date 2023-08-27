@@ -18,77 +18,187 @@ public class DriverValidation implements IDriverValidation {
 
 	@Autowired
 	private IDriverService iDriverService;
-	
+
+	@SuppressWarnings("static-access")
+	Driver invalidParameter = (DriverNull) new DriverNull().builder().name("invalid parameter").build();
+
+	@SuppressWarnings("static-access")
+	Driver unvalidatedDriver = new Driver().builder().name("not validated").build();
+
 	@Override
 	public Driver validateDriver(@Validated DriverDTO driverDTO) {
-		
-		if(iDriverService.verifyDriver(driverDTO.getName())) {
-		
-			return new DriverNull();
-			
-		} else {
-			
-			Driver driver = new Driver();
-			
-			BeanUtils.copyProperties(driverDTO, driver);
-			return this.iDriverService.save(driver);			
+
+		try {
+
+			if (iDriverService.verifyDriver(driverDTO.getName())) {
+
+				return unvalidatedDriver;
+
+			} else {
+
+				Driver driver = new Driver();
+
+				BeanUtils.copyProperties(driverDTO, driver);
+				return this.iDriverService.save(driver);
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
+
+		} catch (NullPointerException e) {
+
+			return invalidParameter;
 		}
 	}
 
 	@Override
 	public Page<Driver> getValidateDriver(Pageable pageable) {
-		
-		return this.iDriverService.getDrivers(pageable);
-	}
 
-	@Override
-	public Driver getValidateDriver(Long id) {
-		
 		try {
-			
-			return this.iDriverService.findId(id).get(); // The .get() method return the class if it exists.
-			
-		} catch (IllegalArgumentException e) {
 
-			return new DriverNull();
+			return this.iDriverService.getDrivers(pageable);
+
+		} catch (Exception e) {
+
+			return Page.empty();
 		}
 	}
 
 	@Override
-	public Driver updateValidadeDriver(@Validated Long id, DriverDTO driverDTO) {
-		
+	public Driver getValidateDriver(Long id) {
+
 		try {
-			
-			Driver driver = new Driver();
-			
-			BeanUtils.copyProperties(driverDTO, driver);
-			driver.setId(this.iDriverService.findId(id).get().getId()); // Keep the same ID for the update.
-			
-			return this.iDriverService.save(driver);
-			
+
+			return this.iDriverService.findId(id).get(); // The .get() method return the class if it exists.
+
 		} catch (IllegalArgumentException e) {
 
-			return new DriverNull();
+			return invalidParameter;
+
+		} catch (NullPointerException e) {
+
+			return invalidParameter;
+		}
+	}
+
+	public Driver updateValidateDriver(@Validated DriverDTO driverDTO) {
+
+		try {
+
+			Driver objectDriver = new Driver();
+
+			if (driverDTO instanceof DriverDTO && driverDTO != null) {
+
+				BeanUtils.copyProperties(driverDTO, objectDriver);
+
+				return this.iDriverService.save(objectDriver);
+
+			} else {
+
+				return unvalidatedDriver;
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
+
+		} catch (NullPointerException e) {
+
+			return invalidParameter;
+		}
+	}
+
+	@Override
+	public Driver updateValidadeDriver(@Validated Long id, @Validated DriverDTO driverDTO) {
+
+		try {
+
+			if (driverDTO instanceof DriverDTO && id != 0) {
+
+				Driver driver = new Driver();
+
+				BeanUtils.copyProperties(driverDTO, driver);
+				driver.setId(iDriverService.findId(id).get().getId()); // Keep the same ID for the update.
+
+				return this.iDriverService.save(driver);
+
+			} else {
+
+				return unvalidatedDriver;
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
+
+		} catch (NullPointerException e) {
+
+			return invalidParameter;
 		}
 	}
 
 	@Override
 	public Driver deleteValidadeDriver(Long id) {
-		
+
 		try {
-			
-			Driver driver = new Driver();
-			
-			driver.setName("Driver deleted");
-			driver.setStatus(false);
-			
-			this.iDriverService.deleteDriver(id);
-			
-			return driver;
-			
+
+			if (!(id == 0)) {
+
+				Driver driver = new Driver();
+
+				driver.setName("Driver Deleted");
+				driver.setStatus(false);
+
+				this.iDriverService.deleteDriver(id);
+
+				return driver;
+				
+			} else {
+
+				return unvalidatedDriver;
+			}
+
 		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
 			
-			return new DriverNull();
+		} catch (NullPointerException e) {
+			
+			return invalidParameter;
 		}
-	}	
+	}
+	
+	@Override
+	public Driver deleteValidadeDriver(Long id, DriverDTO driverDTO) {
+
+		try {
+
+			if (driverDTO instanceof DriverDTO) {
+
+				Driver driver = new Driver();
+
+				BeanUtils.copyProperties(driverDTO, driver);
+
+				this.iDriverService.deleteDriver(id, driver);
+				
+				driver.setName("Driver Deleted");
+				driver.setStatus(false);
+
+				return driver;
+				
+			} else {
+
+				return unvalidatedDriver;
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
+			
+		} catch (NullPointerException e) {
+			
+			return invalidParameter;
+		}
+	}
 }

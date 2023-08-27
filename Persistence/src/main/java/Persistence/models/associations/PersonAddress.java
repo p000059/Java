@@ -1,13 +1,11 @@
-package Persistence.models.intermediate;
+package Persistence.models.associations;
 
 import java.io.Serializable;
 
-import Persistence.models.Embbedable.PersonPhoneId;
+import Persistence.models.Embbedable.PersonAddressId;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -19,20 +17,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Builder
-@Table(name = "person_phone")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "person_address")
 @Entity
-@IdClass(PersonPhoneId.class)
-public class PersonPhone implements Serializable {
+public class PersonAddress implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+/*	@Id
 	@Column(name = "person_id")
 	private Long personId;
 
 	@Id
-	@Column(name = "phone_id")
-	private Long phoneId;
+	@Column(name = "address_id")
+	private Long addressId;*/
+	
+	@EmbeddedId
+	private PersonAddressId personAddressId;
 }

@@ -18,16 +18,21 @@ public class CarValidation implements ICarValidation {
 
 	@Autowired
 	private ICarService icarService;
-
-	@Override
+	
 	@SuppressWarnings("static-access")
+	CarNull invalidParameter = (CarNull) new CarNull().builder().car("invalid parameter").build(); 
+	
+	@SuppressWarnings("static-access")
+	Car unvalidatedCar = new Car().builder().car("not validated").build();
+	
+	@Override
 	public Car validateCar(@Validated CarDTO carDTO) {
 
 		try {
 			
 			if (icarService.verifyCar(carDTO.getCar())) {
 				
-				return new Car().builder().car("not validated").build();
+				return unvalidatedCar;
 				
 			} else {
 				
@@ -68,9 +73,36 @@ public class CarValidation implements ICarValidation {
 			return new CarNull();
 		}
 	}
+	
+	public Car updateValidateCar(@Validated CarDTO carDTO) {
+		
+		try {
+			
+			Car objectCar = new Car();
+			
+			if(carDTO instanceof CarDTO && carDTO != null) {
+				
+				BeanUtils.copyProperties(carDTO, objectCar);
+				
+				return this.icarService.save(objectCar);
+				
+			} else {
+				
+				return unvalidatedCar;				
+			}
+			
+			
+		} catch (IllegalArgumentException e) {
+			
+			return invalidParameter;
+			
+		} catch (NullPointerException e) {
+			
+			return invalidParameter;
+		}
+	}
 
 	@Override
-	@SuppressWarnings("static-access")
 	public Car updateValidadeCar(@Validated Long id, @Validated CarDTO carDTO) {
 
 		try {
@@ -86,17 +118,17 @@ public class CarValidation implements ICarValidation {
 				
 			} else {
 				
-				return new Car().builder().car("object invalid").build();
+				return unvalidatedCar;
 			}
 			
 
 		} catch (IllegalArgumentException e) {
 
-			return new CarNull();
+			return invalidParameter;
 			
 		} catch (NullPointerException e) {
 			
-			return new CarNull();
+			return invalidParameter;
 		}
 	}
 
@@ -105,18 +137,25 @@ public class CarValidation implements ICarValidation {
 
 		try {
 			
-			Car car = new Car();
+			if(!(id == 0)) {
+				
+				Car car = new Car();
+				
+				car.setCar("Car Deleted");
+				car.setStatus(false);
+				
+				this.icarService.deleteCar(id);
+				
+				return car;
+			} else {
+				
+				return unvalidatedCar;
+			}
 			
-			car.setCar("Car Deleted");
-			car.setStatus(false);
-			
-			this.icarService.deleteCar(id);
-			
-			return car;
 			
 		} catch (IllegalArgumentException e) {
 
-			return new CarNull();
+			return invalidParameter;
 		}
 		
 		/*

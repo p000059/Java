@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import Persistence.models.associations.PersonPhone;
 import Persistence.models.entities.Person;
 import Persistence.models.entities.Phone;
-import Persistence.models.intermediate.PersonPhone;
 import Persistence.repositories.PersonPhoneRepository;
 import Persistence.repositories.PersonRepository;
 import Persistence.repositories.PhoneRepository;

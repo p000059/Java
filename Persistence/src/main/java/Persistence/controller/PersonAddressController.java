@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Persistence.DTO.PersonAddressDTO;
+import Persistence.models.associations.PersonAddress;
 import Persistence.models.entities.Address;
 import Persistence.models.entities.Person;
-import Persistence.models.intermediate.PersonAddress;
 import Persistence.services.PersonAddressService;
 
 @RequestMapping(value = "/api")

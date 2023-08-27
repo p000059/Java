@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Persistence.models.Embbedable.PersonAddressId;
+import Persistence.models.associations.PersonAddress;
 import Persistence.models.entities.Address;
 import Persistence.models.entities.Person;
-import Persistence.models.intermediate.PersonAddress;
 import Persistence.repositories.AddressRepository;
 import Persistence.repositories.PersonAddressRepository;
 import Persistence.repositories.PersonRepository;

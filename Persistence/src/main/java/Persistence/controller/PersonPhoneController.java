@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Persistence.DTO.PersonPhoneDTO;
+import Persistence.models.associations.PersonPhone;
 import Persistence.models.entities.Person;
 import Persistence.models.entities.Phone;
-import Persistence.models.intermediate.PersonPhone;
 import Persistence.services.PersonPhoneService;
 
 @RequestMapping(value = "/")
