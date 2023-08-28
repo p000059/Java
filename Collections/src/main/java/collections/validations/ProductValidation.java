@@ -20,7 +20,7 @@ public class ProductValidation implements IProductValidation {
 	private IProductService iProductService;
 	
 	@SuppressWarnings("static-access")
-	ProductNull invalidParameter = (ProductNull) new ProductNull().builder().code("invalid parameter").build(); 
+	Product invalidParameter = new ProductNull().builder().code("invalid parameter").build(); 
 	
 	@SuppressWarnings("static-access")
 	Product unvalidatedProduct = new Product().builder().code("not validated").build();

@@ -20,7 +20,7 @@ public class DriverValidation implements IDriverValidation {
 	private IDriverService iDriverService;
 
 	@SuppressWarnings("static-access")
-	Driver invalidParameter = (DriverNull) new DriverNull().builder().name("invalid parameter").build();
+	Driver invalidParameter = new DriverNull().builder().name("invalid parameter").build();
 
 	@SuppressWarnings("static-access")
 	Driver unvalidatedDriver = new Driver().builder().name("not validated").build();

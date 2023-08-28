@@ -47,6 +47,15 @@ public interface ICarValidation {
 	 * @throws {@link CarNull()} if id is null.
 	 */
 	Car updateValidadeCar(Long id, CarDTO carDTO);
+	
+	/**
+	 * This method validates and updates an object of the {@link Car} class.
+	 *
+	 * @param carDTO must not be {@literal null}.
+	 * @return registered {@link Car} object.
+	 * @throws {@link CarNull()} if id is null.
+	 */
+	Car updateValidateCar(CarDTO carDTO);
 
 	/**
 	 * Delete {@link Car} object.
@@ -56,4 +65,13 @@ public interface ICarValidation {
 	 * @throws {@link CarNull()} if id is null.
 	 */
 	Car deleteValidadeCar(Long id);
+	
+	/**
+	 * Delete {@link Car} object.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return the {@link Car} object deleted.
+	 * @throws {@link CarNull()} if id is null.
+	 */
+	Car deleteValidateCar(Long id, CarDTO carDTO);
 }

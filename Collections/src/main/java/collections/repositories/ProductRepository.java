@@ -54,6 +54,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	 * @param status must not be {@literal null}
 	 * @return a Product object.
 	 */
-	@Query("SELECT a FROM Product a WHERE a.id = :id AND a.code = :name AND a.status = :status")
+	@Query("SELECT a FROM Product a WHERE a.id = :id AND a.code = :code AND a.status = :status")
 	Product queryProductByIdCodeStatus(@Param("id") Long id, @Param("code") String code, @Param("status") Boolean status);
 }

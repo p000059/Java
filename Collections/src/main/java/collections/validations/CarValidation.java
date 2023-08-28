@@ -18,33 +18,38 @@ public class CarValidation implements ICarValidation {
 
 	@Autowired
 	private ICarService icarService;
-	
+
 	@SuppressWarnings("static-access")
-	CarNull invalidParameter = (CarNull) new CarNull().builder().car("invalid parameter").build(); 
-	
+	Car invalidParameter = new CarNull().builder().car("invalid parameter").build();
+
 	@SuppressWarnings("static-access")
 	Car unvalidatedCar = new Car().builder().car("not validated").build();
-	
+
 	@Override
 	public Car validateCar(@Validated CarDTO carDTO) {
 
 		try {
-			
+
 			if (icarService.verifyCar(carDTO.getCar())) {
-				
+
 				return unvalidatedCar;
-				
+
 			} else {
-				
+
 				Car car = new Car();
-				
+
 				BeanUtils.copyProperties(carDTO, car);
+				
 				return this.icarService.save(car);
-			}			
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
 			
-		} catch (Exception e) {
-			
-			return new CarNull();
+		} catch (NullPointerException e) {
+
+			return invalidParameter;
 		}
 	}
 
@@ -52,13 +57,13 @@ public class CarValidation implements ICarValidation {
 	public Page<Car> getValidateCar(Pageable pageable) {
 
 		try {
-			
-			return this.icarService.getCar(pageable);			
-			
+
+			return this.icarService.getCar(pageable);
+
 		} catch (Exception e) {
-			
+
 			return Page.empty();
-		}		
+		}
 	}
 
 	@Override
@@ -70,94 +75,97 @@ public class CarValidation implements ICarValidation {
 
 		} catch (IllegalArgumentException e) {
 
-			return new CarNull();
-		}
-	}
-	
-	public Car updateValidateCar(@Validated CarDTO carDTO) {
-		
-		try {
-			
-			Car objectCar = new Car();
-			
-			if(carDTO instanceof CarDTO && carDTO != null) {
-				
-				BeanUtils.copyProperties(carDTO, objectCar);
-				
-				return this.icarService.save(objectCar);
-				
-			} else {
-				
-				return unvalidatedCar;				
-			}
-			
-			
-		} catch (IllegalArgumentException e) {
-			
 			return invalidParameter;
 			
 		} catch (NullPointerException e) {
-			
+
 			return invalidParameter;
 		}
 	}
 
 	@Override
-	public Car updateValidadeCar(@Validated Long id, @Validated CarDTO carDTO) {
+	public Car updateValidateCar(@Validated CarDTO carDTO) {
 
 		try {
 
-			if(carDTO instanceof CarDTO && id != 0) {
-				
-				Car car = new Car();
-				
-				BeanUtils.copyProperties(carDTO, car);
-				car.setId(icarService.findId(id).get().getId()); // Keep the same ID for the update.
-				
-				return this.icarService.save(car);
-				
+			Car objectCar = new Car();
+
+			if (carDTO instanceof CarDTO && carDTO != null) {
+
+				BeanUtils.copyProperties(carDTO, objectCar);
+
+				return this.icarService.save(objectCar);
+
 			} else {
-				
+
 				return unvalidatedCar;
 			}
-			
 
 		} catch (IllegalArgumentException e) {
 
 			return invalidParameter;
-			
+
 		} catch (NullPointerException e) {
-			
+
 			return invalidParameter;
 		}
 	}
 
 	@Override
+	public Car updateValidadeCar(Long id, @Validated CarDTO carDTO) {
+
+		try {
+
+			if (carDTO instanceof CarDTO && id != 0) {
+
+				Car car = new Car();
+
+				BeanUtils.copyProperties(carDTO, car);
+				car.setId(icarService.findId(id).get().getId()); // Keep the same ID for the update.
+
+				return this.icarService.save(car);
+
+			} else {
+
+				return unvalidatedCar;
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
+
+		} catch (NullPointerException e) {
+
+			return invalidParameter;
+		}
+	}
+
+	@Override
+	@SuppressWarnings("static-access")
 	public Car deleteValidadeCar(Long id) {
 
 		try {
-			
-			if(!(id == 0)) {
-				
-				Car car = new Car();
-				
-				car.setCar("Car Deleted");
-				car.setStatus(false);
-				
+
+			if (!(id == 0)) {
+
 				this.icarService.deleteCar(id);
+
+				return new Car().builder().car("car deleted").build();
 				
-				return car;
 			} else {
-				
+
 				return unvalidatedCar;
 			}
-			
-			
+
 		} catch (IllegalArgumentException e) {
 
 			return invalidParameter;
+			
+		} catch (NullPointerException e) {
+
+			return invalidParameter;
 		}
-		
+
 		/*
 		 * Optional<Car> carOptional = icarService.findId(id);
 		 * 
@@ -175,5 +183,36 @@ public class CarValidation implements ICarValidation {
 		 * 
 		 * }
 		 */
+	}
+
+	@Override
+	@SuppressWarnings("static-access")
+	public Car deleteValidateCar(Long id, CarDTO carDTO) {
+
+		try {
+
+			Car objectCAr = new Car();
+
+			BeanUtils.copyProperties(carDTO, objectCAr);
+
+			if ((id != 0) && (id == this.icarService.getCar(id, objectCAr.getCar()).getId())) {
+
+				this.icarService.deleteCar(id);
+
+				return new Car().builder().car("car deleted").build();
+
+			} else {
+
+				return unvalidatedCar;
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return invalidParameter;
+			
+		} catch (NullPointerException e) {
+			
+			return invalidParameter;
+		}
 	}
 }
