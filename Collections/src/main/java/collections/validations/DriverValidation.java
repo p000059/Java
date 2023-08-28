@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import collections.DTO.DriverDTO;
+import collections.DTO.entities.DriverDTO;
 import collections.models.subclass.entities.Driver;
 import collections.models.subclass.nullables.DriverNull;
 import collections.services.interfaces.IDriverService;

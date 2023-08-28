@@ -3,7 +3,7 @@ package collections.validations.interfaces;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import collections.DTO.ProductDTO;
+import collections.DTO.entities.ProductDTO;
 import collections.models.subclass.entities.Product;
 
 public interface IProductValidation {

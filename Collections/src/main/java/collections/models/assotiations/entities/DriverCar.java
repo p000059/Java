@@ -1,4 +1,4 @@
-package collections.models.assotiations;
+package collections.models.assotiations.entities;
 
 import java.io.Serializable;
 

@@ -78,7 +78,15 @@ public class ProductService implements IProductService {
 	@Override
 	public Page<Product> getProducts(Pageable pageable) {
 
-		return productRepository.findAll(pageable);
+		try {
+			
+			return productRepository.findAll(pageable);			
+			
+		} catch (Exception e) {
+
+			return Page.empty();
+		}
+		
 	}
 
 	@Override

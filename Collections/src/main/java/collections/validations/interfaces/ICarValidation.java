@@ -3,7 +3,7 @@ package collections.validations.interfaces;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import collections.DTO.CarDTO;
+import collections.DTO.entities.CarDTO;
 import collections.models.subclass.entities.Car;
 
 public interface ICarValidation {

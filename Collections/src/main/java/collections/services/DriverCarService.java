@@ -3,8 +3,9 @@ package collections.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import collections.DTO.DriverCarDTO;
-import collections.models.assotiations.DriverCar;
+import collections.DTO.entities.DriverCarDTO;
+import collections.models.assotiations.entities.DriverCar;
+import collections.models.assotiations.nullables.DriverCarNull;
 import collections.models.embedabble.DriverCarFK;
 import collections.models.subclass.entities.Car;
 import collections.models.subclass.entities.Driver;
@@ -16,14 +17,14 @@ import collections.services.interfaces.IDriverService;
 @Service
 public class DriverCarService implements IDriverCarService {
 
-	private Driver objectDriver;
+	private Driver driverObject;
 
-	private Car objectCar;
+	private Car carObject;
 
-	private DriverCarFK objectDriverCarFK;
+	private DriverCarFK driverCarFKobject;
 
-	private DriverCar objectDriverCar;
-	
+	private DriverCar driverCarObject;
+
 	@Autowired
 	private DriverCarRepository driverCarRepository;
 
@@ -38,38 +39,58 @@ public class DriverCarService implements IDriverCarService {
 	public DriverCar saveDriverCar(Driver driver, Car car) {
 
 		try {
-			
-			objectDriver = this.iDriverService.save(driver);
-			objectCar = this.iCarService.save(car);
-			
-			objectDriverCarFK = new DriverCarFK().builder().driverId(objectDriver.getId()).carId(objectCar.getId()).build();
-			
-			objectDriverCar = new DriverCar().builder().driverCarFK(objectDriverCarFK).build();
-			
-			return this.driverCarRepository.save(objectDriverCar);
-			
-			
+
+			if ((driver instanceof Driver) && (car instanceof Car)) {
+
+				driverObject = this.iDriverService.save(driver);
+				carObject = this.iCarService.save(car);
+
+				driverCarFKobject = new DriverCarFK().builder().driverId(driverObject.getId()).carId(carObject.getId())
+						.build();
+
+				driverCarObject = new DriverCar().builder().driverCarFK(driverCarFKobject).build();
+
+				return this.driverCarRepository.save(driverCarObject);
+
+			} else {
+
+				return new DriverCar();
+			}
+
 		} catch (Exception e) {
 
-			return null;
+			return new DriverCarNull();
 		}
-		
-
 	}
 
 	@Override
 	@SuppressWarnings("static-access")
 	public DriverCar saveDriverCar(DriverCarDTO driverCarDTO) {
 
-		objectDriver = this.iDriverService.save(driverCarDTO.getDriver());
-		objectCar = this.iCarService.save(driverCarDTO.getCar());
+		try {
+			
+			if(driverCarDTO instanceof DriverCarDTO) {
+				
+				driverObject = this.iDriverService.save(driverCarDTO.getDriver());
+				carObject = this.iCarService.save(driverCarDTO.getCar());
+				
+				driverCarFKobject = new DriverCarFK().builder().driverId(driverObject.getId()).carId(carObject.getId()).build();
+				
+				driverCarObject = new DriverCar().builder().driverCarFK(driverCarFKobject).build();
+				
+				return this.driverCarRepository.save(driverCarObject);
+				
+			} else {
+				
+				return new DriverCar();
+			}
+			
+		} catch (Exception e) {
 
-		objectDriverCarFK = new DriverCarFK().builder().driverId(objectDriver.getId()).carId(objectCar.getId()).build();
-
-		objectDriverCar = new DriverCar().builder().driverCarFK(objectDriverCarFK).build();
-
-		return this.driverCarRepository.save(objectDriverCar);
-
+			return new DriverCarNull();
+		}
 	}
+	
+	
 
 }

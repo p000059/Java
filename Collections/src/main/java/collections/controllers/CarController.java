@@ -10,46 +10,80 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import collections.DTO.CarDTO;
+import collections.DTO.entities.CarDTO;
+import collections.controllers.interfaces.ICarController;
 import collections.models.subclass.entities.Car;
 import collections.validations.interfaces.ICarValidation;
 
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/car")
 @RestController
 @CrossOrigin(value = "*", maxAge = 3600)
-public class CarController {
+public class CarController implements ICarController {
 
 	@Autowired
 	private ICarValidation iCarValidation;
-	
-	@GetMapping(value = "/readCar")
-	public ResponseEntity<Page<Car>> readDriver(@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.DESC) Pageable pageable) {
+
+	@Override
+	@GetMapping(value = "/getcars")
+	public ResponseEntity<Page<Car>> readCar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.DESC) Pageable pageable) {
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.getValidateCar(pageable));
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.getValidateCar(pageable));			
+			
+		} catch (Exception e) {
+
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(Page.empty());
+		}		
 	}
-	
+
+	@Override
 	@PostMapping(value = "/savecar")
-	public ResponseEntity<Car> saveDriver(@RequestBody CarDTO carDTO) {
-		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.validateCar(carDTO));
+	@SuppressWarnings("static-access")
+	public ResponseEntity<Car> saveCar(CarDTO carDTO) {
+
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.validateCar(carDTO));
+			
+		} catch (Exception e) {
+
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Car().builder().car("invalid object").build());
+		}
 	}
-	
+
+	@Override
+	@SuppressWarnings("static-access")
 	@PutMapping(value = "/updatecar/{id}")
-	public ResponseEntity<Car> updateDriver(@PathVariable(value = "id") Long id, @RequestBody CarDTO carDTO){
-		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.updateValidadeCar(id, carDTO));
+	public ResponseEntity<Car> updateCar(Long id, CarDTO carDTO) {
+
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.updateValidadeCar(id, carDTO));
+			
+		} catch (Exception e) {
+
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Car().builder().car("invalid object").build());
+		}
 	}
-	
+
+	@Override
+	@SuppressWarnings("static-access")
 	@DeleteMapping(value = "/deletecar/{id}")
-	public ResponseEntity<Car> deleteCar(@PathVariable(value = "id") Long id, @RequestBody CarDTO carDTO){
-		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.deleteValidateCar(id, carDTO));
+	public ResponseEntity<Car> deleteCar(Long id, CarDTO carDTO) {
+
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iCarValidation.deleteValidateCar(id, carDTO));
+			
+		} catch (Exception e) {
+
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Car().builder().car("invalid object").build());
+		}
 	}
 }

@@ -3,7 +3,7 @@ package collections.validations.interfaces;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import collections.DTO.DriverDTO;
+import collections.DTO.entities.DriverDTO;
 import collections.models.subclass.entities.Driver;
 
 public interface IDriverValidation {

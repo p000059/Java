@@ -17,39 +17,79 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import collections.DTO.ProductDTO;
+import collections.DTO.entities.ProductDTO;
+import collections.controllers.interfaces.IProductController;
 import collections.models.subclass.entities.Product;
 import collections.validations.interfaces.IProductValidation;
 
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/products")
 @RestController
 @CrossOrigin(value = "*", maxAge = 3600)
-public class ProductController {
+public class ProductController implements IProductController {
 
 	@Autowired
 	private IProductValidation iProductValidation;
 	
+	@Override
 	@GetMapping(value = "/getproducts")
 	public ResponseEntity<Page<Product>> readProduct(@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.DESC) Pageable pageable) {
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.getValidateProduct(pageable));
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.getValidateProduct(pageable));			
+			
+		} catch (Exception e) {
+
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(Page.empty());
+		}
 	}
 	
+	@Override
 	@PostMapping(value = "/saveproduct")
+	@SuppressWarnings("static-access")
 	public ResponseEntity<Product> saveProduct(@RequestBody ProductDTO productDTO) {
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.validateProduct(productDTO));
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.validateProduct(productDTO));			
+			
+		} catch (Exception e) {
+			
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Product().builder().code("invalid object").build());
+		}
+		
 	}
 	
+	@Override
 	@PutMapping(value = "/updateproduct/{id}")
+	@SuppressWarnings("static-access")
 	public ResponseEntity<Product> updateProduct(@PathVariable(value = "id") Long id, @RequestBody ProductDTO productDTO){
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.updateValidadeProduct(id, productDTO));
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.updateValidadeProduct(id, productDTO));			
+			
+		} catch (Exception e) {
+			
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Product().builder().code("invalid object").build());
+		}
+		
 	}
 	
+	@Override
 	@DeleteMapping(value = "/deleteproduct/{id}")
+	@SuppressWarnings("static-access")
 	public ResponseEntity<Product> deleteProduct(@PathVariable(value = "id") Long id, @RequestBody ProductDTO productDto){
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.deleteValidadeProduct(id, productDto));
+		try {
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(iProductValidation.deleteValidadeProduct(id, productDto));			
+			
+		} catch (Exception e) {
+			
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Product().builder().code("invalid object").build());
+		}
 	}
+
+
 }

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import collections.DTO.CarDTO;
+import collections.DTO.entities.CarDTO;
 import collections.models.subclass.entities.Car;
 import collections.models.subclass.nullables.CarNull;
 import collections.services.interfaces.ICarService;

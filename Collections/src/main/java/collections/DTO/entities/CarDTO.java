@@ -1,4 +1,4 @@
-package collections.DTO;
+package collections.DTO.entities;
 
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class DriverDTO {
+public class CarDTO {
 	
 	@Nonnull
 	@NonNull
-	private String name;
+	private String car;
 	
 	@Nonnull
 	private boolean status;

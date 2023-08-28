@@ -1,24 +1,21 @@
-package collections.DTO;
+package collections.DTO.entities;
 
-import jakarta.annotation.Nonnull;
+import collections.models.subclass.entities.Car;
+import collections.models.subclass.entities.Driver;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class CarDTO {
+public class DriverCarDTO {
+
+	private Driver driver;
 	
-	@Nonnull
-	@NonNull
-	private String car;
-	
-	@Nonnull
-	private boolean status;
+	private Car car;
 }

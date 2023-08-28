@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import collections.DTO.ProductDTO;
+import collections.DTO.entities.ProductDTO;
 import collections.models.subclass.entities.Product;
 import collections.models.subclass.nullables.ProductNull;
 import collections.services.interfaces.IProductService;
