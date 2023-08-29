@@ -68,29 +68,52 @@ public class DriverCarService implements IDriverCarService {
 	public DriverCar saveDriverCar(DriverCarDTO driverCarDTO) {
 
 		try {
-			
-			if(driverCarDTO instanceof DriverCarDTO) {
-				
+
+			if (driverCarDTO instanceof DriverCarDTO) {
+
 				driverObject = this.iDriverService.save(driverCarDTO.getDriver());
 				carObject = this.iCarService.save(driverCarDTO.getCar());
-				
-				driverCarFKobject = new DriverCarFK().builder().driverId(driverObject.getId()).carId(carObject.getId()).build();
-				
+
+				driverCarFKobject = new DriverCarFK().builder().driverId(driverObject.getId()).carId(carObject.getId())
+						.build();
+
 				driverCarObject = new DriverCar().builder().driverCarFK(driverCarFKobject).build();
-				
+
 				return this.driverCarRepository.save(driverCarObject);
-				
+
 			} else {
-				
+
 				return new DriverCar();
 			}
-			
+
 		} catch (Exception e) {
 
 			return new DriverCarNull();
 		}
 	}
-	
-	
+
+	@Override
+	public DriverCar updateDriverCar(DriverCarDTO driverCarDTO) {
+
+		try {
+
+			if ((driverCarDTO instanceof DriverCarDTO)) {
+				
+				driverObject = this.iDriverService.getDriver(driverCarDTO.getDriver().getId());
+				carObject = this.iCarService.getCar(driverCarDTO.getCar().getId());
+				
+				return this.saveDriverCar(driverObject, carObject);
+				
+			} else {
+				
+				return new DriverCar();
+			}
+
+
+		} catch (Exception e) {
+
+			return new DriverCarNull();
+		}
+	}
 
 }
