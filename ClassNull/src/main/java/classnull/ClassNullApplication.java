@@ -8,6 +8,7 @@ public class ClassNullApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClassNullApplication.class, args);
+		System.out.println(Math.round(-3.22));
 	}
 
 }

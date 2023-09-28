@@ -5,9 +5,9 @@ import ic.interfaces.Ideduction;
 public class SPdeduction implements Ideduction {
 
 	@Override
-	public void deduction(Double tax) {
-		// TODO Auto-generated method stub
+	public Double deduction(Double tax) {
 		
+		return tax * 0.05;
 	}
 
 }
