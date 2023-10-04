@@ -2,32 +2,23 @@ package ic;
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ic.model.Car;
+import ic.model.Fuel;
+import ic.repositories.IFuelRepository;
 import ic.repositories.IcarRepository;
-import ic.service.CarService;
-import ic.service.interfaces.IcarService;
 
 @Service
 class TestModel {
 
 	@Autowired
-	private IcarService icarService;
-
-	private CarService carService;
-
-	@Autowired
 	private IcarRepository icarRepository;
-
-	@Before
-	public void setUp() {
-
-		this.icarService = new CarService();
-	}
+	
+	@Autowired
+	private IFuelRepository iFuelRepository;
 
 	@Test
 	public void test() {
@@ -84,5 +75,18 @@ class TestModel {
 		System.out.println(car.getName());
 		System.out.println(car.getStatus());
 
+	}
+	
+	@Test
+	public Fuel insert() {
+		
+		Fuel objectFuel = new Fuel();
+		
+		objectFuel.setType("alcool");
+		objectFuel.setStatus(true);
+		
+		Fuel fuel = this.iFuelRepository.saveFuel(objectFuel);
+		
+		return fuel;
 	}
 }

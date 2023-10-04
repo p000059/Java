@@ -4,21 +4,25 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import ic.model.Car;
 import ic.model.nullable.CarNull;
+import jakarta.persistence.LockModeType;
 import jakarta.transaction.Transactional;
 
 public interface IcarRepository extends JpaRepository<Car, Long> {
 
 	Iterable<Car> findByName(String name);
 
+	@Lock(LockModeType.READ)
 	@Query(value = "SELECT p FROM Car p WHERE p.name like %?1%")
 	List<Car> findNameCar(String name);
 
+	@Lock(LockModeType.READ)
 	@Query(value = "SELECT p FROM Car p WHERE p.name = :name")
 	Car findNameCarParam(@Param("name") String name);
 
