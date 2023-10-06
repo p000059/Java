@@ -1,6 +1,7 @@
 package ic.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,36 @@ public class CarService implements IcarService {
 			return new ArrayList<Car>();
 		}
 		
+	}
+
+	@SuppressWarnings("static-access")
+	@Override
+	public Car deleteCar(Long id) {
+		
+		try {
+			
+			Car objectCar = this.icarRepository.findById(id).get();
+			this.icarRepository.deleteById(objectCar.getId());
+			
+			
+			return new Car().builder().name("Deleted Car").build();
+			
+		} catch (Exception e) {
+			
+			return new CarNull();
+		}
+	}
+
+	@Override
+	public List<Car> listCar() {
+		
+		try {
+			
+			return this.icarRepository.findAll();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Car>();
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package ic.service.interfaces;
 
+import java.util.List;
+
 import ic.model.Car;
 
 public interface IcarService {
@@ -22,4 +24,20 @@ public interface IcarService {
 	 * @throws {@link CarNull} if nameCar are null.
 	 */
 	Iterable<Car> getCarByName(String nameCar);
+	
+	/**
+	 * Delete a Car object.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @throws {@link CarNull} if id is null.
+	 */
+	Car deleteCar(Long id);
+	
+	/**
+	 * List Car object.
+	 *
+	 * @return the List Car object.
+	 * @throws ArrayList<Car> null.
+	 */
+	List<Car> listCar();
 }
