@@ -23,10 +23,13 @@ public class TaxService implements ItaxService {
 
 			return this.itaxRepository.saveTax(car);
 
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
 
 			return new TaxNull();
 
+		} catch (IllegalArgumentException e) {
+			
+			return new TaxNull();
 		}
 	}
 

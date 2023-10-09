@@ -1,6 +1,5 @@
 package ic.dto;
 
-import ic.model.Tax;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,16 +7,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@EqualsAndHashCode
-public class CarDTO {
+public class TaxDTO {
 
-	private String name;
+	private String type;
 	
-	private Tax tax;
+	private Double tax;
 	
 	private Boolean status;
-	
 }
