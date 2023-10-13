@@ -1,4 +1,4 @@
-package ic.model;
+package ic.model.entity;
 
 import ic.interfaces.Ideduction;
 

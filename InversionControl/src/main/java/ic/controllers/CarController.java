@@ -11,17 +11,19 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ic.controllers.interfaces.IcarController;
-import ic.dto.CarDTO;
-import ic.model.Car;
-import ic.model.Tax;
-import ic.service.interfaces.IcarService;
+import ic.interfaces.controller.IcarController;
+import ic.interfaces.service.IcarService;
+import ic.interfaces.validation.IcarValidation;
+import ic.model.dto.CarDTO;
+import ic.model.entity.Car;
 
 @RequestMapping(value = "/")
 @RestController
@@ -30,23 +32,25 @@ public class CarController implements IcarController {
 
 	@Autowired
 	private IcarService icarService;
-
+	
+	@Autowired
+	private IcarValidation icarValidation;
+	
+	private Car convertDTO(CarDTO carDTO) {
+		
+		Car objectCar = new Car();
+		
+		BeanUtils.copyProperties(carDTO, objectCar);
+		
+		return objectCar;
+	}
+	
 	@Override
 	@PostMapping(value = "insertcar")
 	@ResponseBody
 	public ResponseEntity<Car> insertCar(@RequestBody CarDTO carDTO) {
 		
-		Car objectCar = new Car();
-		
-		Tax objectTax = new Tax();
-		
-		BeanUtils.copyProperties(carDTO.getTax(), objectTax);
-		
-		BeanUtils.copyProperties(carDTO, objectCar);
-		
-		objectCar.setTax(objectTax);
-		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.icarService.insert(objectCar));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.icarService.insert(icarValidation.validateInsertion(carDTO)));
 	}
 
 	@Override
@@ -56,9 +60,11 @@ public class CarController implements IcarController {
 	}
 
 	@Override
+	@GetMapping(value = "listcar")
+	@ResponseBody
 	public ResponseEntity<List<Car>> readAllCars() {
 		
-		return null;
+		return ResponseEntity.status(HttpStatus.OK).body(this.icarService.listCar());
 	}
 
 	@Override
@@ -74,12 +80,14 @@ public class CarController implements IcarController {
 	}
 
 	@Override
-	public ResponseEntity<Car> deleteCar(CarDTO carDTO) {
+	@DeleteMapping(value = "deletecar")
+	@ResponseBody
+	public ResponseEntity<Car> deleteCar(@RequestBody CarDTO carDTO) {
 		
-		return null;
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.icarService.deleteCar(this.convertDTO(carDTO)));
 	}
 
-	@Override
+	@Override	
 	public ResponseEntity<List<Car>> updateCars(List<Car> cars) {
 		
 		return null;

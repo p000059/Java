@@ -1,14 +1,15 @@
 package ic.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ic.model.Tax;
+import ic.interfaces.repository.ItaxRepository;
+import ic.interfaces.service.ItaxService;
+import ic.model.entity.Tax;
 import ic.model.nullable.TaxNull;
-import ic.repositories.ItaxRepository;
-import ic.service.interfaces.ItaxService;
 
 @Service
 public class TaxService implements ItaxService {
@@ -28,7 +29,7 @@ public class TaxService implements ItaxService {
 			return new TaxNull();
 
 		} catch (IllegalArgumentException e) {
-			
+
 			return new TaxNull();
 		}
 	}
@@ -43,6 +44,80 @@ public class TaxService implements ItaxService {
 		} catch (Exception e) {
 
 			return new ArrayList<Tax>();
+		}
+	}
+
+	@Override
+	public List<Tax> listTax() {
+
+		try {
+
+			return this.itaxRepository.findAll();
+
+		} catch (NullPointerException e) {
+
+			return new ArrayList<Tax>();
+
+		} catch (IllegalArgumentException e) {
+
+			return new ArrayList<Tax>();
+		}
+	}
+
+	@Override
+	@SuppressWarnings("static-access")
+	public Tax updateTax(Tax tax) {
+
+		try {
+
+			Tax objectTax = this.itaxRepository.findById(tax.getId()).get();
+
+			if (tax instanceof Tax && objectTax.getId() == tax.getId()) {
+
+				return this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
+						objectTax.getStatus());
+
+			} else {
+
+				return new TaxNull();
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+
+		} catch (NullPointerException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+		}
+	}
+
+	@SuppressWarnings("static-access")
+	@Override
+	public Tax deleteTax(Tax tax) {
+
+		try {
+
+			Tax objectTax = this.itaxRepository.findById(tax.getId()).get();
+
+			if (tax instanceof Tax && objectTax.getId() == tax.getId()) {
+
+				this.itaxRepository.deleteTaxByType(tax.getType());
+				
+				return objectTax;
+
+			} else {
+
+				return new TaxNull();
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+
+		} catch (NullPointerException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
 		}
 	}
 

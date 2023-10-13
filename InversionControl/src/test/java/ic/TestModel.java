@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ic.model.Car;
-import ic.model.Fuel;
-import ic.repositories.IFuelRepository;
-import ic.repositories.IcarRepository;
+import ic.interfaces.repository.IFuelRepository;
+import ic.interfaces.repository.IcarRepository;
+import ic.model.entity.Car;
+import ic.model.entity.Fuel;
 
 @Service
 class TestModel {

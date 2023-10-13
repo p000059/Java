@@ -1,6 +1,6 @@
-package ic.dto;
+package ic.model.dto;
 
-import ic.model.Tax;
+import ic.model.entity.Tax;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class CarDTO {
 
+	private Long id;
+	
 	private String name;
 	
 	private Tax tax;

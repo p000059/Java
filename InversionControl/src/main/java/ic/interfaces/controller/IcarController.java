@@ -1,4 +1,4 @@
-package ic.controllers.interfaces;
+package ic.interfaces.controller;
 
 import java.awt.print.Pageable;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 
-import ic.dto.CarDTO;
-import ic.model.Car;
+import ic.model.dto.CarDTO;
+import ic.model.entity.Car;
 
 public interface IcarController {
 	

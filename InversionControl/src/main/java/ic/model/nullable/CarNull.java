@@ -1,6 +1,6 @@
 package ic.model.nullable;
 
-import ic.model.Car;
+import ic.model.entity.Car;
 
 public class CarNull extends Car {
 

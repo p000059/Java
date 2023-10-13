@@ -1,6 +1,6 @@
 package ic.model.nullable;
 
-import ic.model.Tax;
+import ic.model.entity.Tax;
 
 
 public class TaxNull extends Tax {

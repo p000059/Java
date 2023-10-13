@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ic.model.Fuel;
+import ic.interfaces.repository.IFuelRepository;
+import ic.interfaces.service.IfuelService;
+import ic.model.entity.Fuel;
 import ic.model.nullable.FuelNull;
-import ic.repositories.IFuelRepository;
-import ic.service.interfaces.IfuelService;
 
 @Service
 public class FuelService implements IfuelService {

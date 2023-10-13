@@ -1,6 +1,6 @@
 package ic.model.nullable;
 
-import ic.model.Fuel;
+import ic.model.entity.Fuel;
 
 public class FuelNull extends Fuel {
 

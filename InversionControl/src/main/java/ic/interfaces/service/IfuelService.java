@@ -1,8 +1,8 @@
-package ic.service.interfaces;
+package ic.interfaces.service;
 
 import java.util.List;
 
-import ic.model.Fuel;
+import ic.model.entity.Fuel;
 
 public interface IfuelService {
 

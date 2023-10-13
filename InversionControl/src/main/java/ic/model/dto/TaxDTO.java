@@ -1,4 +1,4 @@
-package ic.dto;
+package ic.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TaxDTO {
 
+	private Long id;
+	
 	private String type;
 	
 	private Double tax;

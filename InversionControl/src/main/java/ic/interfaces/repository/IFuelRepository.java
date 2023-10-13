@@ -1,4 +1,4 @@
-package ic.repositories;
+package ic.interfaces.repository;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import ic.model.Fuel;
+import ic.model.entity.Fuel;
 import ic.model.nullable.FuelNull;
 import jakarta.transaction.Transactional;
 
