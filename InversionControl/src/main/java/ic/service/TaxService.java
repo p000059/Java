@@ -92,8 +92,8 @@ public class TaxService implements ItaxService {
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
+	@SuppressWarnings("static-access")
 	public Tax deleteTax(Tax tax) {
 
 		try {
@@ -102,14 +102,41 @@ public class TaxService implements ItaxService {
 
 			if (tax instanceof Tax && objectTax.getId() == tax.getId()) {
 
-				this.itaxRepository.deleteTaxByType(tax.getType());
-				
-				return objectTax;
+				return this.itaxRepository.deleteTaxById(tax.getId(), false);
 
 			} else {
 
 				return new TaxNull();
 			}
+
+		} catch (IllegalArgumentException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+
+		} catch (NullPointerException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+		}
+	}
+	
+	@Override
+	@SuppressWarnings("static-access")
+	public Tax deleteTaxType(String type) {
+
+		try {
+
+			/*
+			 * Tax objectTax = this.itaxRepository.findBy(type => , null);
+			 * 
+			 * if (tax instanceof Tax && objectTax.getId() == tax.getId()) {
+			 * 
+			 * return this.itaxRepository.deleteTaxByType(tax.getType(), false);
+			 * 
+			 * } else {
+			 * 
+			 * return new TaxNull(); }
+			 */
+			return null;
 
 		} catch (IllegalArgumentException e) {
 

@@ -54,7 +54,8 @@ public class CarController implements IcarController {
 	}
 
 	@Override
-	public ResponseEntity<Car> readCar(CarDTO carDTO) {
+	@GetMapping(value = "readcar")
+	public ResponseEntity<Car> readCar(List<CarDTO> carDTO) {
 		
 		return null;
 	}

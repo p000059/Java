@@ -49,4 +49,13 @@ public interface ItaxService {
 	 * @throws {@link TaxNull} if tax is null.
 	 */
 	Tax deleteTax(Tax tax);
+	
+	/**
+	 * Delete Tax object.
+	 *
+	 * @param tax must not be {@literal null}.
+	 * @return confirmation message in object.
+	 * @throws {@link TaxNull} if tax is null.
+	 */
+	Tax deleteTaxType(String type);
 }

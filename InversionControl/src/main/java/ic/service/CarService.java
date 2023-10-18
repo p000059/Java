@@ -95,8 +95,8 @@ public class CarService implements IcarService {
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
+	@SuppressWarnings("static-access")
 	public Car deleteCar(Car car) {
 		
 		try {
@@ -105,7 +105,7 @@ public class CarService implements IcarService {
 			
 			if(car instanceof Car && car.getId() == objectCar.getId()) {
 				
-				this.icarRepository.deleteCarById(car.getId());
+				this.icarRepository.deleteCarById(car.getId(), false);
 
 				return new Car().builder().name("deleted car").build();
 				

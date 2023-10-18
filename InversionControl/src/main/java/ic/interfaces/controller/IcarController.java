@@ -15,7 +15,7 @@ public interface IcarController {
 	
 	ResponseEntity<Car> insertCar(CarDTO carDTO);
 	
-	ResponseEntity<Car> readCar(CarDTO carDTO);
+	ResponseEntity<Car> readCar(List<CarDTO> carDTO);
 	
 	ResponseEntity<List<Car>> readAllCars();
 	

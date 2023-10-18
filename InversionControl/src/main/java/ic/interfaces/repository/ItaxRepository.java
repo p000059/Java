@@ -16,30 +16,30 @@ import jakarta.transaction.Transactional;
 public interface ItaxRepository extends JpaRepository<Tax, Long> {
 
 	Iterable<Tax> findByTax(Double tax);
-	
+
 	@Query(value = "SELECT p FROM Tax p WHERE p.type like %?1%")
 	List<Tax> findTypeTax(String type);
-	
+
 	@Query(value = "SELECT p FROM Tax p WHERE p.tax = :tax")
 	Tax findTypeTaxParam(@Param("tax") String tax);
-	
+
 	@Transactional
 	@SuppressWarnings("unchecked")
 	default <S extends Tax> S saveTax(S entity) {
 
 		return entity instanceof Tax ? save(entity) : (S) new TaxNull();
 	}
-	
-	/*
-	 * @Query(value = "DELETE FROM Tax u WHERE u.type = ?1") void
-	 * deleteTaxByType(String type);
-	 */
-	
+
 	@Modifying
 	@Transactional(rollbackOn = SQLException.class, dontRollbackOn = NullPointerException.class)
-	@Query("DELETE FROM Tax u WHERE u.type = :type")
-	void deleteTaxByType(@Param("type") String type);
-	
+	@Query(value = "UPDATE Tax p SET p.status = ?2 WHERE p.id = ?1")
+	Tax deleteTaxById(Long id, Boolean status);
+
+	@Modifying
+	@Transactional(rollbackOn = SQLException.class, dontRollbackOn = NullPointerException.class)
+	@Query("UPDATE Tax u SET u.status = ?2 WHERE u.type = ?1")
+	Tax deleteTaxByType(String type, Boolean status);
+
 	@Modifying
 	@Transactional(rollbackOn = SQLException.class, dontRollbackOn = NullPointerException.class)
 	@Query(value = "UPDATE Tax u set u.type = ?2, u.tax = ?3, u.status = ?4 WHERE u.id = ?1")
