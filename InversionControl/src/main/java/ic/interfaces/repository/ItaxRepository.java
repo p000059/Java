@@ -23,6 +23,9 @@ public interface ItaxRepository extends JpaRepository<Tax, Long> {
 	@Query(value = "SELECT p FROM Tax p WHERE p.tax = :tax")
 	Tax findTypeTaxParam(@Param("tax") String tax);
 
+	@Query(value = "SELECT p FROM Tax p WHERE p.type = ?1")
+	Tax findTaxType(String type);
+	
 	@Transactional
 	@SuppressWarnings("unchecked")
 	default <S extends Tax> S saveTax(S entity) {

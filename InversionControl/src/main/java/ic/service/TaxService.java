@@ -91,7 +91,63 @@ public class TaxService implements ItaxService {
 			return new TaxNull().builder().type("object invalid").build();
 		}
 	}
+	
+	@Override
+	@SuppressWarnings("static-access")
+	public Tax updateTax(Long id) {
 
+		try {
+
+			Tax objectTax = this.itaxRepository.findById(id).get();
+
+			if ((id != null && id != 0) && (objectTax.getId() == id)) {
+
+				return this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
+						objectTax.getStatus());
+
+			} else {
+
+				return new TaxNull();
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+
+		} catch (NullPointerException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+		}
+	}
+
+	@Override
+	@SuppressWarnings({ "static-access", "unlikely-arg-type" })
+	public Tax updateTax(String type) {
+
+		try {
+
+			Tax objectTax = this.itaxRepository.findTaxType(type);
+
+			if ((type.equals(String.class)) && (objectTax.getType() == type)) {
+
+				return this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
+						objectTax.getStatus());
+
+			} else {
+
+				return new TaxNull();
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+
+		} catch (NullPointerException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+		}
+	}
+	
 	@Override
 	@SuppressWarnings("static-access")
 	public Tax deleteTax(Tax tax) {
@@ -121,22 +177,43 @@ public class TaxService implements ItaxService {
 	
 	@Override
 	@SuppressWarnings("static-access")
-	public Tax deleteTaxType(String type) {
+	public Tax deleteTax(Long id) {
 
 		try {
 
-			/*
-			 * Tax objectTax = this.itaxRepository.findBy(type => , null);
-			 * 
-			 * if (tax instanceof Tax && objectTax.getId() == tax.getId()) {
-			 * 
-			 * return this.itaxRepository.deleteTaxByType(tax.getType(), false);
-			 * 
-			 * } else {
-			 * 
-			 * return new TaxNull(); }
-			 */
-			return null;
+			if (id != null && id != 0) {
+
+				return this.itaxRepository.deleteTaxById(id, false);
+
+			} else {
+
+				return new TaxNull();
+			}
+
+		} catch (IllegalArgumentException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+
+		} catch (NullPointerException e) {
+
+			return new TaxNull().builder().type("object invalid").build();
+		}
+	}
+
+	@Override
+	@SuppressWarnings({ "static-access", "unlikely-arg-type" })
+	public Tax deleteTax(String type) {
+
+		try {
+
+			if (type.equals(String.class)) {
+
+				return this.itaxRepository.deleteTaxByType(type, false);
+
+			} else {
+
+				return new TaxNull();
+			}
 
 		} catch (IllegalArgumentException e) {
 

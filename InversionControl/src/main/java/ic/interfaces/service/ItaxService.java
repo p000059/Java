@@ -42,6 +42,24 @@ public interface ItaxService {
 	Tax updateTax(Tax tax);
 	
 	/**
+	 * Update Tax object.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return a tax object updated.
+	 * @throws {@link TaxNull} if id is null.
+	 */
+	Tax updateTax(Long id);
+	
+	/**
+	 * Update Tax object.
+	 *
+	 * @param type must not be {@literal null}.
+	 * @return a tax object updated.
+	 * @throws {@link TaxNull} if type is null.
+	 */
+	Tax updateTax(String type);
+	
+	/**
 	 * Delete Tax object.
 	 *
 	 * @param tax must not be {@literal null}.
@@ -53,9 +71,18 @@ public interface ItaxService {
 	/**
 	 * Delete Tax object.
 	 *
+	 * @param id must not be {@literal null}.
+	 * @return confirmation message.
+	 * @throws {@link TaxNull} if id is null.
+	 */
+	Tax deleteTax(Long id);
+	
+	/**
+	 * Delete Tax object.
+	 *
 	 * @param tax must not be {@literal null}.
 	 * @return confirmation message in object.
 	 * @throws {@link TaxNull} if tax is null.
 	 */
-	Tax deleteTaxType(String type);
+	Tax deleteTax(String type);
 }
