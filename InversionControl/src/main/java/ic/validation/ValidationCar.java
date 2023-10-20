@@ -1,5 +1,8 @@
 package ic.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +64,25 @@ public class ValidationCar implements IcarValidation {
 			return new CarNull().builder().name("object null").build();
 
 		}
+	}
+
+	@Override
+	public List<Car> validateInsertion(List<CarDTO> listCarDTO) {
+		
+		try {
+			
+			return null;
+			
+		} catch (IllegalArgumentException e) {
+
+			return new ArrayList<>();
+
+		} catch (NullPointerException e) {
+
+			return new ArrayList<>();
+
+		}
+		
 	}
 
 }

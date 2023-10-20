@@ -57,4 +57,12 @@ public interface IcarService {
 	 * @throws ArrayList<Car> null.
 	 */
 	List<Car> listCar();
+	
+	/**
+	 * Insert List Car object.
+	 *
+	 * @return the List Car object.
+	 * @throws ArrayList<Car> null.
+	 */
+	List<Car> insertCars(List<Car> listCar);
 }
