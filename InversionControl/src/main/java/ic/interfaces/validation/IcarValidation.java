@@ -23,5 +23,23 @@ public interface IcarValidation {
 	 * @return the inserted list.
 	 * @throws {@link ArrayList<>()} if listCarDTO is null.
 	 */
-	List<Car> validateInsertion(List<CarDTO> listCarDTO);
+	List<Car> validateInsertions(List<CarDTO> listCarDTO);
+	
+	/**
+	 * Validates the find of a car object.
+	 *
+	 * @param carDTO must not be {@literal null}.	 
+	 * @return car Object.
+	 * @throws {@link CarNull} if carDTO is null.
+	 */
+	Car readCar(CarDTO carDTO);
+	
+	/**
+	 * Delete a car object.
+	 *
+	 * @param carDTO must not be {@literal null}.	 
+	 * @return car Object.
+	 * @throws {@link CarNull} if carDTO is null.
+	 */
+	Car deleteCar(CarDTO carDTO);
 }

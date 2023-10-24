@@ -31,12 +31,12 @@ public class ValidationCar implements IcarValidation {
 		BeanUtils.copyProperties(carDTO, objectCar);
 
 		objectCar.setTax(objectTax);
-		
+
 		return objectCar;
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
+	@SuppressWarnings("static-access")
 	public Car validateInsertion(CarDTO carDTO) {
 
 		try {
@@ -67,22 +67,41 @@ public class ValidationCar implements IcarValidation {
 	}
 
 	@Override
-	public List<Car> validateInsertion(List<CarDTO> listCarDTO) {
-		
+	public List<Car> validateInsertions(List<CarDTO> listCarDTO) {
+
 		try {
-			
-			return null;
-			
+
+			List<Car> listCar = new ArrayList<Car>();
+
+			for (int i = 0; i < listCarDTO.size(); i++) {
+
+				listCar.add(this.convertToCarObject(listCarDTO.get(i)));
+			}
+
+			return this.icarService.insertCars(listCar);
+
 		} catch (IllegalArgumentException e) {
 
-			return new ArrayList<>();
+			return new ArrayList<Car>();
 
 		} catch (NullPointerException e) {
 
-			return new ArrayList<>();
+			return new ArrayList<Car>();
 
 		}
+	}
+
+	@Override
+	public Car readCar(CarDTO carDTO) {
 		
+		try {
+			
+			return this.icarService.findCar(this.convertToCarObject(carDTO));
+			
+		} catch (Exception e) {
+
+			return new CarNull();
+		}
 	}
 
 }

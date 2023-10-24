@@ -15,9 +15,11 @@ public interface IcarController {
 	
 	ResponseEntity<Car> insertCar(CarDTO carDTO);
 	
-	ResponseEntity<Car> readCar(List<CarDTO> carDTO);
+	ResponseEntity<List<Car>> insertCars(List<CarDTO> listCarDTO);
 	
-	ResponseEntity<List<Car>> readAllCars();
+	ResponseEntity<Car> readCar(CarDTO carDTO);
+	
+	ResponseEntity<List<Car>> readCars();
 	
 	ResponseEntity<Page<Car>> readAllCars(@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.DESC) Pageable pageable);
 	

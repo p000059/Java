@@ -45,25 +45,43 @@ public class CarController implements IcarController {
 		return objectCar;
 	}
 	
+	@SuppressWarnings("unused")
+	private CarDTO convertObject(Car car) {
+		
+		CarDTO objectCarDTO = new CarDTO();
+		
+		BeanUtils.copyProperties(car, objectCarDTO);
+		
+		return objectCarDTO;
+	}
+	
 	@Override
 	@PostMapping(value = "insertcar")
 	@ResponseBody
 	public ResponseEntity<Car> insertCar(@RequestBody CarDTO carDTO) {
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.icarService.insert(icarValidation.validateInsertion(carDTO)));
+		return ResponseEntity.status(HttpStatus.CREATED).body(icarValidation.validateInsertion(carDTO));
 	}
 
 	@Override
-	@GetMapping(value = "readcar")
-	public ResponseEntity<Car> readCar(List<CarDTO> carDTO) {
+	@PostMapping(value = "insertlistcar")
+	@ResponseBody
+	public ResponseEntity<List<Car>> insertCars(@RequestBody List<CarDTO> listCarDTO){
 		
-		return null;
+		return ResponseEntity.status(HttpStatus.CREATED).body(icarValidation.validateInsertions(listCarDTO));
+	}
+	
+	@Override
+	@GetMapping(value = "readcar")
+	public ResponseEntity<Car> readCar(CarDTO carDTO) {
+		
+		return ResponseEntity.status(HttpStatus.OK).body(this.icarValidation.readCar(carDTO));
 	}
 
 	@Override
 	@GetMapping(value = "listcar")
 	@ResponseBody
-	public ResponseEntity<List<Car>> readAllCars() {
+	public ResponseEntity<List<Car>> readCars() {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(this.icarService.listCar());
 	}
@@ -85,7 +103,7 @@ public class CarController implements IcarController {
 	@ResponseBody
 	public ResponseEntity<Car> deleteCar(@RequestBody CarDTO carDTO) {
 		
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.icarService.deleteCar(this.convertDTO(carDTO)));
+		return ResponseEntity.status(HttpStatus.OK).body(this.icarService.deleteCar(this.convertDTO(carDTO)));
 	}
 
 	@Override	
