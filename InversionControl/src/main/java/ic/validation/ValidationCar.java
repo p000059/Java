@@ -35,8 +35,28 @@ public class ValidationCar implements IcarValidation {
 		return objectCar;
 	}
 
+	@SuppressWarnings({ "static-access" })
+	private Car exceptionMessage(Exception exception) {
+
+		if (exception instanceof Exception) {
+
+			return new CarNull().builder().name("Error: Verify Object").build();
+
+		} else if (exception instanceof IllegalArgumentException) {
+
+			return new CarNull().builder().name("illegal argument").build();
+
+		} else if (exception instanceof NullPointerException) {
+
+			return new CarNull().builder().name("null pointer exception").build();
+
+		} else {
+
+			return new CarNull();
+		}
+	}
+
 	@Override
-	@SuppressWarnings("static-access")
 	public Car validateInsertion(CarDTO carDTO) {
 
 		try {
@@ -55,15 +75,11 @@ public class ValidationCar implements IcarValidation {
 				return new CarNull();
 			}
 
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 
-			return new CarNull().builder().name("Illegal Argument").build();
+			return this.exceptionMessage(e);
 
-		} catch (NullPointerException e) {
-
-			return new CarNull().builder().name("object null").build();
-
-		}
+		} 
 	}
 
 	@Override
@@ -80,27 +96,52 @@ public class ValidationCar implements IcarValidation {
 
 			return this.icarService.insertCars(listCar);
 
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 
 			return new ArrayList<Car>();
 
-		} catch (NullPointerException e) {
-
-			return new ArrayList<Car>();
-
-		}
+		} 
 	}
 
 	@Override
 	public Car readCar(CarDTO carDTO) {
-		
+
 		try {
-			
+
 			return this.icarService.findCar(this.convertToCarObject(carDTO));
-			
+
 		} catch (Exception e) {
 
 			return new CarNull();
+		}
+	}
+
+	@Override
+	public Car deleteCar(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Car validateCarUpdate(CarDTO carDTO) {
+
+		try {
+
+			Car objectCar = this.icarService.findCar(this.convertToCarObject(carDTO));
+
+			if ((objectCar.getId() == carDTO.getId()) && (objectCar instanceof Car)
+					&& (objectCar.getTax() instanceof Tax)) {
+
+				return this.icarService.updateCar(objectCar);
+
+			} else {
+
+				return new CarNull();
+			}
+
+		} catch (Exception e) {
+
+			return this.exceptionMessage(e);
 		}
 	}
 

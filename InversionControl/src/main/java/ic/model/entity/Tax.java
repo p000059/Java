@@ -34,6 +34,15 @@ public class Tax implements Serializable {
 	@Column(name = "type", length = 50, nullable = false)
 	private String type;
 	
+	@Column(name = "model", length = 40, nullable = true)
+	private String model;
+	
+	@Column(name = "code", length = 10, nullable = false)
+	private String code;
+	
+	@Column(name = "manufacturer", length = 50,  nullable = true)
+	private String manufacturer;
+	
 	@Column(name = "tax", nullable = false)
 	private Double tax;
 	

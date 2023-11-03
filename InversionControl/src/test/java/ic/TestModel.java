@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import ic.interfaces.repository.IFuelRepository;
 import ic.interfaces.repository.IcarRepository;
+import ic.interfaces.validation.ItaxValidation;
+import ic.model.dto.TaxDTO;
 import ic.model.entity.Car;
 import ic.model.entity.Fuel;
+import ic.model.entity.Tax;
 
 @Service
 class TestModel {
@@ -19,6 +22,9 @@ class TestModel {
 	
 	@Autowired
 	private IFuelRepository iFuelRepository;
+	
+	@Autowired
+	private ItaxValidation itaxValidation;
 
 	@Test
 	public void test() {
@@ -88,5 +94,19 @@ class TestModel {
 		Fuel fuel = this.iFuelRepository.saveFuel(objectFuel);
 		
 		return fuel;
+	}
+	
+	@Test
+	public Tax insertTax() {
+		
+		TaxDTO objectTax = new TaxDTO();
+		
+		objectTax.setType("Pump Pressure");
+		objectTax.setModel("JP4T-7Y");
+		objectTax.setManufacturer("Bosch");
+		objectTax.setTax(4.5);
+		objectTax.setStatus(true);
+		
+		return this.itaxValidation.insertion(objectTax);
 	}
 }

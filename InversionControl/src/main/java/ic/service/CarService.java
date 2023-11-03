@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ic.interfaces.repository.IcarRepository;
 import ic.interfaces.service.IcarService;
+import ic.interfaces.service.ItaxService;
 import ic.model.entity.Car;
 import ic.model.nullable.CarNull;
 import jakarta.transaction.Transactional;
@@ -18,6 +19,30 @@ public class CarService implements IcarService {
 	@Autowired
 	private IcarRepository icarRepository;
 
+	@Autowired
+	private ItaxService itaxService;
+
+	@SuppressWarnings({ "static-access" })
+	private Car exceptionMessage(Exception exception) {
+
+		if (exception instanceof Exception) {
+
+			return new CarNull().builder().name("Error: Verify Object").build();
+
+		} else if (exception instanceof IllegalArgumentException) {
+
+			return new CarNull().builder().name("illegal argument").build();
+
+		} else if (exception instanceof NullPointerException) {
+
+			return new CarNull().builder().name("null pointer exception").build();
+
+		} else {
+
+			return new CarNull();
+		}
+	}
+
 	@Override
 	public Car findCar(Car car) {
 
@@ -25,13 +50,9 @@ public class CarService implements IcarService {
 
 			return this.icarRepository.findNameCarParam(car.getName());
 
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 
-			return new CarNull();
-
-		} catch (NullPointerException e) {
-
-			return new CarNull();
+			return this.exceptionMessage(e);
 		}
 	}
 
@@ -45,7 +66,7 @@ public class CarService implements IcarService {
 
 		} catch (Exception e) {
 
-			return new CarNull();
+			return this.exceptionMessage(e);
 
 		}
 	}
@@ -78,7 +99,7 @@ public class CarService implements IcarService {
 
 		} catch (Exception e) {
 
-			return new CarNull();
+			return this.exceptionMessage(e);
 		}
 	}
 
@@ -115,13 +136,10 @@ public class CarService implements IcarService {
 				return new CarNull();
 			}
 
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 
-			return new CarNull().builder().name("object null").build();
+			return this.exceptionMessage(e);
 
-		} catch (IllegalArgumentException e) {
-
-			return new CarNull().builder().name("illegal argument").build();
 		}
 	}
 
@@ -138,5 +156,14 @@ public class CarService implements IcarService {
 			return new ArrayList<Car>();
 		}
 
+	}
+
+	@Override
+	public Car updateCar(Car car) {
+
+		this.icarRepository.updateCar(car.getId(), car.getName(), this.itaxService.updateTax(car.getTax()),
+				car.getStatus());
+		
+		return this.icarRepository.findNameCarParam(car.getName());
 	}
 }

@@ -42,4 +42,13 @@ public interface IcarValidation {
 	 * @throws {@link CarNull} if carDTO is null.
 	 */
 	Car deleteCar(CarDTO carDTO);
+	
+	/**
+	 * Update a car object.
+	 *
+	 * @param carDTO must not be {@literal null}.	 
+	 * @return car Object.
+	 * @throws {@link CarNull} if carDTO is null.
+	 */
+	Car validateCarUpdate(CarDTO carDTO);
 }

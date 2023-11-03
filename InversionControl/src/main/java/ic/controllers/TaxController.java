@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ic.interfaces.controller.ItaxController;
 import ic.interfaces.service.ItaxService;
+import ic.interfaces.validation.ItaxValidation;
 import ic.model.dto.TaxDTO;
 import ic.model.entity.Tax;
 
@@ -28,6 +29,9 @@ public class TaxController implements ItaxController {
 
 	@Autowired
 	private ItaxService itaxService;
+	
+	@Autowired
+	private ItaxValidation itaxValidation;
 
 	private Tax convertDTO(TaxDTO taxDTO) {
 		
@@ -43,7 +47,7 @@ public class TaxController implements ItaxController {
 	@ResponseBody
 	public ResponseEntity<Tax> insertTax(@RequestBody TaxDTO taxDTO) {
 
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.itaxService.insert(this.convertDTO(taxDTO)));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.itaxValidation.insertion(taxDTO));
 	}
 
 	@Override

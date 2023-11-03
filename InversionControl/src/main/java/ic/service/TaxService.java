@@ -46,6 +46,19 @@ public class TaxService implements ItaxService {
 			return new ArrayList<Tax>();
 		}
 	}
+	
+	@Override
+	public List<Tax> getTaxList(String type){
+		
+		try {
+			
+			return this.itaxRepository.findTypeTax(type);
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Tax>();
+		}
+	}
 
 	@Override
 	public List<Tax> listTax() {
@@ -74,8 +87,10 @@ public class TaxService implements ItaxService {
 
 			if (tax instanceof Tax && objectTax.getId() == tax.getId()) {
 
-				return this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
+				this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
 						objectTax.getStatus());
+
+				return this.itaxRepository.findById(objectTax.getId()).get();
 
 			} else {
 
@@ -91,7 +106,7 @@ public class TaxService implements ItaxService {
 			return new TaxNull().builder().type("object invalid").build();
 		}
 	}
-	
+
 	@Override
 	@SuppressWarnings("static-access")
 	public Tax updateTax(Long id) {
@@ -102,8 +117,10 @@ public class TaxService implements ItaxService {
 
 			if ((id != null && id != 0) && (objectTax.getId() == id)) {
 
-				return this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
+				this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
 						objectTax.getStatus());
+
+				return this.itaxRepository.findById(objectTax.getId()).get();
 
 			} else {
 
@@ -130,8 +147,10 @@ public class TaxService implements ItaxService {
 
 			if ((type.equals(String.class)) && (objectTax.getType() == type)) {
 
-				return this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
+				this.itaxRepository.updateTaxById(objectTax.getId(), objectTax.getType(), objectTax.getTax(),
 						objectTax.getStatus());
+
+				return this.itaxRepository.findById(objectTax.getId()).get();
 
 			} else {
 
@@ -147,7 +166,7 @@ public class TaxService implements ItaxService {
 			return new TaxNull().builder().type("object invalid").build();
 		}
 	}
-	
+
 	@Override
 	@SuppressWarnings("static-access")
 	public Tax deleteTax(Tax tax) {
@@ -158,7 +177,9 @@ public class TaxService implements ItaxService {
 
 			if (tax instanceof Tax && objectTax.getId() == tax.getId()) {
 
-				return this.itaxRepository.deleteTaxById(tax.getId(), false);
+				this.itaxRepository.deleteTaxById(tax.getId(), false);
+
+				return objectTax;
 
 			} else {
 
@@ -174,16 +195,20 @@ public class TaxService implements ItaxService {
 			return new TaxNull().builder().type("object invalid").build();
 		}
 	}
-	
+
 	@Override
 	@SuppressWarnings("static-access")
 	public Tax deleteTax(Long id) {
 
 		try {
 
+			Tax objectTax = this.itaxRepository.findById(id).get();
+			
 			if (id != null && id != 0) {
 
-				return this.itaxRepository.deleteTaxById(id, false);
+				this.itaxRepository.deleteTaxById(id, false);
+
+				return this.itaxRepository.findById(objectTax.getId()).get();
 
 			} else {
 

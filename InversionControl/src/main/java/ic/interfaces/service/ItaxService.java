@@ -26,6 +26,15 @@ public interface ItaxService {
 	Iterable<Tax> getTaxByType(String type);
 	
 	/**
+	 * Returns list of Rate objects.
+	 *
+	 * @param type must not be {@literal null}.
+	 * @return a List Tax object registered.
+	 * @throws {@link TaxNull} if type is null.
+	 */
+	List<Tax> getTaxList(String type);
+	
+	/**
 	 * List Tax object.
 	 * @return a List Tax object registered.
 	 * @throws list null.

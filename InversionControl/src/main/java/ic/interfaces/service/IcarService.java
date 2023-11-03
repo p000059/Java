@@ -65,4 +65,13 @@ public interface IcarService {
 	 * @throws ArrayList<Car> null.
 	 */
 	List<Car> insertCars(List<Car> listCar);
+	
+	/**
+	 * Update Car object.
+	 *
+	 * @param car must not be {@literal null}.
+	 * @return the Car object.
+	 * @throws {@link CarNull} null.
+	 */
+	Car updateCar(Car car);
 }

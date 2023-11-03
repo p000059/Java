@@ -17,6 +17,12 @@ public class TaxDTO {
 	
 	private String type;
 	
+	private String model;
+	
+	private String code;
+	
+	private String manufacturer;
+	
 	private Double tax;
 	
 	private Boolean status;

@@ -26,6 +26,9 @@ public interface ItaxRepository extends JpaRepository<Tax, Long> {
 	@Query(value = "SELECT p FROM Tax p WHERE p.type = ?1")
 	Tax findTaxType(String type);
 	
+	@Query(value = "SELECT p FROM Tax p WHERE p.tax = ?1")
+	Tax findTax(Double tax);
+	
 	@Transactional
 	@SuppressWarnings("unchecked")
 	default <S extends Tax> S saveTax(S entity) {
@@ -36,7 +39,7 @@ public interface ItaxRepository extends JpaRepository<Tax, Long> {
 	@Modifying
 	@Transactional(rollbackOn = SQLException.class, dontRollbackOn = NullPointerException.class)
 	@Query(value = "UPDATE Tax p SET p.status = ?2 WHERE p.id = ?1")
-	Tax deleteTaxById(Long id, Boolean status);
+	void deleteTaxById(Long id, Boolean status);
 
 	@Modifying
 	@Transactional(rollbackOn = SQLException.class, dontRollbackOn = NullPointerException.class)
@@ -46,5 +49,5 @@ public interface ItaxRepository extends JpaRepository<Tax, Long> {
 	@Modifying
 	@Transactional(rollbackOn = SQLException.class, dontRollbackOn = NullPointerException.class)
 	@Query(value = "UPDATE Tax u set u.type = ?2, u.tax = ?3, u.status = ?4 WHERE u.id = ?1")
-	Tax updateTaxById(Long id, String type, Double tax, Boolean status);
+	Integer updateTaxById(Long id, String type, Double tax, Boolean status);
 }
