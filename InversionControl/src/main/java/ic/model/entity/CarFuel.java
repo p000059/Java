@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "car_fuels")
-public class CarFuels implements Serializable {
+public class CarFuel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
