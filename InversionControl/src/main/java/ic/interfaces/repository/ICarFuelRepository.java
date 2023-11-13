@@ -12,7 +12,7 @@ public interface ICarFuelRepository extends JpaRepository<CarFuel, Long> {
 	@SuppressWarnings({"unchecked"})
 	default <S extends CarFuel> S saveCarFuel(CarFuel carFuel) {
 		
-		return carFuel instanceof CarFuel ? (S) save(carFuel) : (S) new CarFuelNull();
+		return (carFuel instanceof CarFuel) ? (S) save(carFuel) : (S) new CarFuelNull();
 	}
 	
 	

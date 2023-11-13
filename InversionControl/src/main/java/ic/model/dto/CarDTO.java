@@ -18,6 +18,8 @@ public class CarDTO {
 	
 	private String name;
 	
+	private String carLicensePlate;
+	
 	private Tax tax;
 	
 	private Boolean status;

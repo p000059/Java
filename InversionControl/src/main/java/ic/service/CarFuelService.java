@@ -34,19 +34,26 @@ public class CarFuelService implements IcarFuelService {
 	@SuppressWarnings("static-access")
 	public CarFuel insert(Car car, Fuel fuel) {
 
-		/*
-		 * Car objectCar = this.icarService.insert(car);
-		 * 
-		 * Fuel objectFuel = this.ifuelService.insert(fuel);
-		 * 
-		 * CarFuelFK carFuelFK = new
-		 * CarFuelFK().builder().carId(this.icarService.insert(car).getId())
-		 * .fuelId(this.ifuelService.insert(fuel).getId()).build();
-		 */
+		try {
+			
+			Car objectCar = this.icarService.insert(car);
+			
+			Fuel objectFuel = this.ifuelService.insert(fuel);
+			
+			CarFuelFK carFuelFK = new CarFuelFK();
+			
+			carFuelFK.setCarId(objectCar.getId());
+			carFuelFK.setFuelId(objectFuel.getId());
+			
+			CarFuel saveCarFuel = new CarFuel().builder().carFuelFK(carFuelFK).message(null).build();
+			
+			return this.iCarFuelRepository.save(saveCarFuel);
+			
+			
+		} catch (Exception e) {
 
-		return this.iCarFuelRepository.saveCarFuel(
-				new CarFuel().builder().carFuelFK(new CarFuelFK().builder().carId(this.icarService.insert(car).getId())
-						.fuelId(this.ifuelService.insert(fuel).getId()).build()).build());
+			return new CarFuel().builder().carFuelFK(null).message(e).build();
+		}
+		
 	}
-
 }

@@ -22,8 +22,8 @@ public interface IcarRepository extends JpaRepository<Car, Long> {
 	List<Car> findNameCar(String name);
 
 	/* @Lock(LockModeType.READ) */
-	@Query(value = "SELECT p FROM Car p WHERE p.name = :name")
-	Car findNameCarParam(@Param("name") String name);
+	@Query(value = "SELECT p FROM Car p WHERE p.carLicensePlate = :carLicensePlate")
+	Car findPlateCarParam(@Param("carLicensePlate") String carLicensePlate);
 
 	@Transactional
 	@SuppressWarnings("unchecked")
@@ -49,8 +49,8 @@ public interface IcarRepository extends JpaRepository<Car, Long> {
 	
 	@Modifying
 	@Transactional(rollbackOn = SQLException.class)
-	@Query(value = "UPDATE Car u SET u.name = ?2, u.tax = ?3, u.status = ?4 WHERE u.id = ?1")
-	void updateCar(Long id, String name, Tax tax, Boolean status); 
+	@Query(value = "UPDATE Car u SET u.name = ?2, u.carLicensePlate = ?3, u.tax = ?4, u.status = ?5 WHERE u.id = ?1")
+	void updateCar(Long id, String name, String carLicensePlate, Tax tax, Boolean status); 
 	
 	@Query(value = "SELECT c FROM Car c")
 	List<Car> listAllCars();

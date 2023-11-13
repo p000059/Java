@@ -3,6 +3,7 @@ package ic.model.entity;
 import java.io.Serializable;
 
 import ic.model.embeddables.CarFuelFK;
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -25,4 +26,7 @@ public class CarFuel implements Serializable {
 
 	@EmbeddedId
 	private CarFuelFK carFuelFK;
+	
+	@Column(name = "message")
+	private Exception message;
 }

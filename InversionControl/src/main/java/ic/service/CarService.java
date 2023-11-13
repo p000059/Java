@@ -22,53 +22,17 @@ public class CarService implements IcarService {
 	@Autowired
 	private ItaxService itaxService;
 
-	@SuppressWarnings({ "static-access" })
-	private Car exceptionMessage(Exception exception) {
-
-		if (exception instanceof Exception) {
-
-			return new CarNull().builder().name("Error: Verify Object").build();
-
-		} else if (exception instanceof IllegalArgumentException) {
-
-			return new CarNull().builder().name("illegal argument").build();
-
-		} else if (exception instanceof NullPointerException) {
-
-			return new CarNull().builder().name("null pointer exception").build();
-
-		} else {
-
-			return new CarNull();
-		}
-	}
-
 	@Override
 	public Car findCar(Car car) {
 
-		try {
-
-			return this.icarRepository.findNameCarParam(car.getName());
-
-		} catch (Exception e) {
-
-			return this.exceptionMessage(e);
-		}
+		return this.icarRepository.findPlateCarParam(car.getCarLicensePlate());
 	}
 
 	@Override
 	@Transactional
 	public Car insert(Car car) {
 
-		try {
-
-			return this.icarRepository.saveCar(car);
-
-		} catch (Exception e) {
-
-			return this.exceptionMessage(e);
-
-		}
+		return this.icarRepository.saveCar(car);
 	}
 
 	@Override
@@ -90,17 +54,10 @@ public class CarService implements IcarService {
 	@SuppressWarnings("static-access")
 	public Car deleteCar(Long id) {
 
-		try {
+		Car objectCar = this.icarRepository.findById(id).get();
+		this.icarRepository.deleteById(objectCar.getId());
 
-			Car objectCar = this.icarRepository.findById(id).get();
-			this.icarRepository.deleteById(objectCar.getId());
-
-			return new Car().builder().name("Deleted Car").build();
-
-		} catch (Exception e) {
-
-			return this.exceptionMessage(e);
-		}
+		return new Car().builder().name("Deleted Car").build();
 	}
 
 	@Override
@@ -121,26 +78,19 @@ public class CarService implements IcarService {
 	@SuppressWarnings("static-access")
 	public Car deleteCar(Car car) {
 
-		try {
+		Car objectCar = this.icarRepository.findById(car.getId()).get();
 
-			Car objectCar = this.icarRepository.findById(car.getId()).get();
+		if (car instanceof Car && (car.getId() == objectCar.getId())) {
 
-			if (car instanceof Car && car.getId() == objectCar.getId()) {
+			this.icarRepository.deleteCarById(car.getId(), false);
 
-				this.icarRepository.deleteCarById(car.getId(), false);
+			return new Car().builder().name("deleted car").build();
 
-				return new Car().builder().name("deleted car").build();
+		} else {
 
-			} else {
-
-				return new CarNull();
-			}
-
-		} catch (Exception e) {
-
-			return this.exceptionMessage(e);
-
+			return new CarNull();
 		}
+
 	}
 
 	@Override
@@ -161,9 +111,9 @@ public class CarService implements IcarService {
 	@Override
 	public Car updateCar(Car car) {
 
-		this.icarRepository.updateCar(car.getId(), car.getName(), this.itaxService.updateTax(car.getTax()),
+		this.icarRepository.updateCar(car.getId(), car.getName(), car.getCarLicensePlate(), this.itaxService.updateTax(car.getTax()),
 				car.getStatus());
-		
-		return this.icarRepository.findNameCarParam(car.getName());
+
+		return this.icarRepository.findById(car.getId()).get();
 	}
 }

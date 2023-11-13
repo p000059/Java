@@ -45,8 +45,7 @@ public class CarFuelValidation {
 		return new CarFuel().builder().carFuelFK(carFuelFK).build();
 	}
 
-	@SuppressWarnings("unused")
-	private Fuel convertDTOtoObject(FuelDTO fuelDTO) {
+	private Fuel convertFuelDTOtoObject(FuelDTO fuelDTO) {
 
 		Fuel objectFuel = new Fuel();
 
@@ -55,8 +54,7 @@ public class CarFuelValidation {
 		return objectFuel;
 	}
 
-	@SuppressWarnings("unused")
-	private Car convertDTOtoObject(CarDTO carDTO) {
+	private Car convertCarDTOtoObject(CarDTO carDTO) {
 
 		Car objectCar = new Car();
 
@@ -71,13 +69,30 @@ public class CarFuelValidation {
 		try {
 
 			return ((carDTO instanceof CarDTO) && (fuelDTO instanceof FuelDTO))
-					? this.icarFuelService.insert(this.convertDTOtoObject(carDTO), this.convertDTOtoObject(fuelDTO))
+					? this.icarFuelService.insert(this.convertCarDTOtoObject(carDTO), this.convertFuelDTOtoObject(fuelDTO))
 					: new CarFuelNull().builder().build();
 
 		} catch (Exception e) {
 
-			return new CarFuelNull().builder().build();
+			return new CarFuelNull().builder().message(e).build();
 		}
 
 	}
+	
+	@SuppressWarnings("static-access")
+	public CarFuel insertValidation(CarFuelDTO carFuelDTO) {
+		
+		try {
+			
+			Car objectCar = this.convertCarDTOtoObject(carFuelDTO.getCarDTO());
+			Fuel objectFuel = this.convertFuelDTOtoObject(carFuelDTO.getFuelDTO());
+			
+			return this.icarFuelService.insert(objectCar, objectFuel);
+			
+		} catch (Exception e) {
+
+			return new CarFuelNull().builder().build();
+		}
+	}
+	
 }

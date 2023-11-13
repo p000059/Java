@@ -37,6 +37,9 @@ public class Car implements Serializable {
 	@Column(name = "name", length = 50, nullable = false)
 	private String name;
 	
+	@Column(name = "car_license_plate", length = 7, nullable = false)
+	private String carLicensePlate;
+	
 	@ManyToOne(optional = false, targetEntity = Tax.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Tax tax;
 

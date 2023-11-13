@@ -75,7 +75,7 @@ class TestModel {
 	@Test
 	public void readNameCarParam() {
 
-		Car car = this.icarRepository.findNameCarParam("Marea");
+		Car car = (Car) this.icarRepository.findByName("Marea");
 
 		System.out.println(car.getId());
 		System.out.println(car.getName());

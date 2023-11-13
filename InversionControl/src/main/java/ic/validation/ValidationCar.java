@@ -38,17 +38,17 @@ public class ValidationCar implements IcarValidation {
 	@SuppressWarnings({ "static-access" })
 	private Car exceptionMessage(Exception exception) {
 
-		if (exception instanceof Exception) {
+		if (exception instanceof IllegalArgumentException) {
 
-			return new CarNull().builder().name("Error: Verify Object").build();
-
-		} else if (exception instanceof IllegalArgumentException) {
-
-			return new CarNull().builder().name("illegal argument").build();
+			return new CarNull().builder().name(exception.getMessage()).build();
 
 		} else if (exception instanceof NullPointerException) {
 
-			return new CarNull().builder().name("null pointer exception").build();
+			return new CarNull().builder().name(exception.getMessage()).build();
+
+		} else if (exception instanceof Exception) {
+
+			return new CarNull().builder().name(exception.getMessage()).build();
 
 		} else {
 
@@ -112,7 +112,7 @@ public class ValidationCar implements IcarValidation {
 
 		} catch (Exception e) {
 
-			return new CarNull();
+			return this.exceptionMessage(e);
 		}
 	}
 
