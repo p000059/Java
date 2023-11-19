@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ic.interfaces.controller.IpartController;
 import ic.interfaces.validations.IpartValidation;
+import ic.model.DTO.PartDTO;
 import ic.model.entity.Part;
 
 @RequestMapping(value = "/")
@@ -30,9 +31,9 @@ public class PartController implements IpartController {
 	@Override
 	@ResponseBody
 	@PostMapping(value = "insertpart")
-	public ResponseEntity<Part> insert(@RequestBody Part part) {
+	public ResponseEntity<Part> insert(@RequestBody PartDTO partDTO) {
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(this.ipartValidation.insert(part));
+		return ResponseEntity.status(HttpStatus.CREATED).body(this.ipartValidation.insert(partDTO));
 	}
 
 	@Override

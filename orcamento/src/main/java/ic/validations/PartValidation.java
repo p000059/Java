@@ -3,12 +3,14 @@ package ic.validations;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ic.interfaces.repository.PartRepository;
 import ic.interfaces.services.IpartService;
 import ic.interfaces.validations.IpartValidation;
+import ic.model.DTO.PartDTO;
 import ic.model.classnull.PartNull;
 import ic.model.entity.Part;
 
@@ -25,15 +27,26 @@ public class PartValidation implements IpartValidation {
 		return this.partRepository.findById(part.getId()).get();
 	}
 
+	private Part convertDTOtoObject(PartDTO partDTO) {
+		
+		Part objectPart = new Part();
+		
+		BeanUtils.copyProperties(partDTO, objectPart);
+		
+		return objectPart;
+	}
+	
 	@Override
 	@SuppressWarnings("static-access")
-	public Part insert(Part part) {
+	public Part insert(PartDTO partDTO) {
 		
 		try {
 
-			if ((part instanceof Part) && (this.searchPart(part).getCode() != part.getCode())) {
+			Part objectPart = this.convertDTOtoObject(partDTO);
+			
+			if ((objectPart instanceof Part) && (this.searchPart(objectPart).getCode() != objectPart.getCode())) {
 
-				return this.ipartService.insert(part);
+				return this.ipartService.insert(objectPart);
 
 			} else {
 
