@@ -13,4 +13,6 @@ public interface IpartService {
 	List<Part> listParts();
 	
 	void delete(Part part);
+	
+	List<Part> listParts(String part);
 }

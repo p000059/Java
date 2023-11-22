@@ -21,6 +21,9 @@ public interface PartRepository extends JpaRepository<Part, Long> {
 	@Query(value = "select p from Part p")
 	List<Part> partsLists();
 	
+	@Query(value = "select p from Part p where upper(trim(p.name)) like %?1%")
+	List<Part> searchByNameList(String name);
+	
 	@Modifying
 	@Transactional(rollbackOn = SQLException.class)
 	@Query(value = "update Part p set p.status = ?2 WHERE p.id = ?1")

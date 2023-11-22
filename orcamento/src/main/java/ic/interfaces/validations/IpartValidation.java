@@ -9,9 +9,11 @@ public interface IpartValidation {
 
 	Part insert(PartDTO partDTO);
 	
-	Part update(Part part);
+	Part update(PartDTO partDTO);
 	
 	List<Part> listParts();
 	
-	Part delete(Part part);
+	Part delete(PartDTO partDTO);
+	
+	List<Part> listParts(String name);
 }

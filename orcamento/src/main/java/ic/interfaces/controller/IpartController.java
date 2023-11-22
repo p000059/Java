@@ -11,9 +11,11 @@ public interface IpartController {
 
 	ResponseEntity<Part> insert(PartDTO partDTO);
 	
-	ResponseEntity<Part> update(Part part);
+	ResponseEntity<Part> update(PartDTO partDTO);
 	
 	ResponseEntity<List<Part>> listParts();
 	
-	ResponseEntity<Part> deletePart(Part part);
+	ResponseEntity<Part> deletePart(PartDTO partDTO);
+	
+	ResponseEntity<List<Part>> listParts(String name);
 }

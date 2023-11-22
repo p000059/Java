@@ -20,6 +20,7 @@ public class PartValidation implements IpartValidation {
 	@Autowired
 	private IpartService ipartService;
 
+	@Autowired
 	private PartRepository partRepository;
 	
 	private Part searchPart(Part part) {
@@ -34,6 +35,16 @@ public class PartValidation implements IpartValidation {
 		BeanUtils.copyProperties(partDTO, objectPart);
 		
 		return objectPart;
+	}
+	
+	@SuppressWarnings("unused")
+	private PartDTO convertObjecttoDTO(Part part) {
+		
+		PartDTO partDTO = new PartDTO();
+		
+		BeanUtils.copyProperties(part, partDTO);
+		
+		return partDTO;
 	}
 	
 	@Override
@@ -61,16 +72,22 @@ public class PartValidation implements IpartValidation {
 
 	@Override
 	@SuppressWarnings("static-access")
-	public Part update(Part part) {
+	public Part update(PartDTO partDTO) {
 		try {
+			
+			Part objectPart = this.convertDTOtoObject(partDTO);
 
-			if ((part instanceof Part) && (part.getId() == this.searchPart(part).getId())) {
+			if ((objectPart instanceof Part) && (objectPart.getId() == this.searchPart(objectPart).getId())) {
 
-				return this.partRepository.searchByCode(part.getCode());				
+				return this.partRepository.searchByCode(objectPart.getCode());				
 
+			} else if(objectPart.getId() == null) {
+
+				return new PartNull().builder().code("id null").build();
+				
 			} else {
-
-				return new PartNull().builder().code("non-existent registration").build();
+				
+				return new PartNull().builder().code("non-existing record").build();
 			}
 
 		} catch (Exception e) {
@@ -94,15 +111,17 @@ public class PartValidation implements IpartValidation {
 
 	@Override
 	@SuppressWarnings("static-access")
-	public Part delete(Part part) {
+	public Part delete(PartDTO partDTO) {
 		
 		try {
 
-			if ((part instanceof Part) && (part.getId() == this.searchPart(part).getId())) {
+			Part objectPart = this.convertDTOtoObject(partDTO);
+			
+			if ((objectPart instanceof Part) && (objectPart.getId() == this.searchPart(objectPart).getId())) {
 
-				this.partRepository.delete(part);
+				this.partRepository.delete(objectPart);
 
-				return this.partRepository.findById(part.getId()).get();
+				return this.partRepository.findById(objectPart.getId()).get();
 
 			} else {
 
@@ -112,6 +131,26 @@ public class PartValidation implements IpartValidation {
 		} catch (Exception e) {
 
 			return new Part().builder().description(e.getLocalizedMessage()).build();
+		}
+	}
+
+	@Override
+	@SuppressWarnings("static-access")
+	public List<Part> listParts(String name) {
+		
+		try {
+			
+			return this.ipartService.listParts(name.trim().toUpperCase());
+			
+		} catch (Exception e) {
+			
+			Part objectPart = new Part().builder().code(e.getLocalizedMessage()).build();
+			
+			List<Part> listPart = new ArrayList<>();
+			
+			listPart.add(objectPart);
+			
+			return listPart;
 		}
 	}
 

@@ -38,4 +38,10 @@ public class PartService implements IpartService {
 
 		this.partRepository.deleteByCode(part.getId(), false);
 	}
+
+	@Override
+	public List<Part> listParts(String part) {
+		
+		return this.partRepository.searchByNameList(part);
+	}
 }

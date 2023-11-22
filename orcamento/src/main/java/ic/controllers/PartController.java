@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,9 +40,9 @@ public class PartController implements IpartController {
 	@Override
 	@ResponseBody
 	@PutMapping(value = "updatepart")
-	public ResponseEntity<Part> update(@RequestBody Part part) {
+	public ResponseEntity<Part> update(@RequestBody PartDTO partDTO) {
 
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.ipartValidation.update(part));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.ipartValidation.update(partDTO));
 	}
 
 	@Override
@@ -55,8 +56,18 @@ public class PartController implements IpartController {
 	@Override
 	@ResponseBody
 	@DeleteMapping(value = "deletepart")
-	public ResponseEntity<Part> deletePart(@RequestBody Part part) {
+	public ResponseEntity<Part> deletePart(@RequestBody PartDTO partDTO) {
 		
-		return ResponseEntity.status(HttpStatus.GONE).body(this.ipartValidation.delete(part));
+		return ResponseEntity.status(HttpStatus.GONE).body(this.ipartValidation.delete(partDTO));
 	}
+
+	@Override
+	@ResponseBody
+	@GetMapping(value = "getlistname")
+	public ResponseEntity<List<Part>> listParts(@RequestParam(value = "name") String name) {
+		
+		return ResponseEntity.status(HttpStatus.OK).body(this.ipartValidation.listParts(name));
+	}
+	
+	
 }
