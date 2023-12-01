@@ -1,0 +1,193 @@
+* {
+  font-family: system-ui;
+}
+
+body {
+  box-sizing: border-box;
+  font-style: normal;
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  background-color: rgb(152, 201, 192);
+  vertical-align: middle;
+  padding: 1px;
+  color: #ecedee;
+  font-size: 14px;
+  font-weight: 550;
+  text-shadow: 1px 1px 2px #000000;
+  text-transform: capitalize;
+  text-align: center;
+  text-justify: inherit;
+}
+
+.ltext-header {
+  color: #ecedee;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px #000000;
+  text-transform: capitalize;
+  text-align: center;
+  text-justify: inherit;
+}
+
+.text-table {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 110%;
+}
+
+main {
+  padding: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  border-spacing: 3px;
+  background-color: #9da0a3;
+  vertical-align: middle;
+  font: bold;
+  padding: 1px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 550;
+  color: #ecedee;
+  text-shadow: 1px 1px 3px #000000;
+  text-align: center;
+  text-justify: auto;
+  text-transform: capitalize;
+}
+
+.ltext-footer {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 600;
+  color: #ecedee;
+  text-shadow: 1px 1px 3px #000000;
+  text-align: center;
+  text-justify: auto;
+  text-transform: uppercase;
+}
+
+.labels {
+  border-radius: 5px;
+  border-width: 1px;
+  letter-spacing: 1px;
+  text-justify: inherit;
+  margin: 2px 2px 2px 2px;
+  text-align: left;
+  padding: 4px 10px 4px 10px;
+  text-transform: capitalize;
+}
+
+.buttons {
+  border-radius: 5px;
+  border-width: 1px;
+  letter-spacing: 1px;
+  text-justify: inherit;
+  margin: 2px 2px 2px 2px;
+  padding: 4px 20px 4px 20px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.inputs {
+  border-radius: 5px;
+  border-width: 1px;
+  letter-spacing: 1px;
+  text-justify: inherit;
+  margin: 2px 2px 2px 2px;
+  text-align: left;
+  padding: 4px 10px 4px 10px;
+  text-transform: none;
+}
+
+.btn-danger {
+  border-color: rgb(255, 83, 83);
+  background-color: rgb(255, 83, 83);
+  color: rgb(238, 236, 236);
+}
+
+.btn-info {
+  border-color: rgb(115, 153, 179);
+  background-color: rgb(115, 153, 179);
+  color: rgb(238, 236, 236);
+}
+
+.btn-success {
+  border-color: rgb(122, 189, 144);
+  background-color: rgb(122, 189, 144);
+  color: rgb(238, 236, 236);
+}
+
+.btn-green {
+  border-color: rgb(124, 190, 178);
+  background-color: rgb(124, 190, 178);
+  color: rgb(238, 236, 236);
+}
+
+.btn-warning {
+  border-color: rgb(190, 179, 81);
+  background-color: rgb(190, 179, 81);
+  color: rgb(238, 236, 236);
+}
+
+.btn-neutral {
+  border-color: rgb(182, 182, 182);
+  background-color: rgb(182, 182, 182);
+  color: rgb(238, 236, 236);
+}
+
+.btn-neutral-clear {
+  border-color: rgb(214, 213, 213);
+  background-color: rgb(214, 213, 213);
+  color: rgb(131, 131, 131);
+}
+
+.tables {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tables td,
+.tables th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.tables tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.tables tr:hover {
+  background-color: #ddd;
+}
+
+.tables th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #56a588;
+  color: white;
+}
+
+.selects {
+  border-radius: 5px;
+  border-width: 1px;
+  letter-spacing: 1px;
+  text-justify: inherit;
+  margin: 2px 2px 2px 2px;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+/*# sourceMappingURL=custom.css.map */

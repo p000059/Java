@@ -1,0 +1,25 @@
+.section-frame {
+  padding: 1px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(243, 239, 239);
+}
+
+.header-frame {
+  color: rgb(77, 76, 76);
+  text-transform: uppercase;
+  font-weight: 750;
+  letter-spacing: 1px;
+  background-color: rgb(209, 207, 207);
+  text-align: center;
+  padding: 4px;
+}
+
+.article-frame {
+  background-color: white;
+  padding: 3px;
+}
+
+/*# sourceMappingURL=struct.css.map */

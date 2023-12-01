@@ -1,0 +1,76 @@
+.labels {
+  border-radius: 5px;
+  border-width: 1px;
+  letter-spacing: 1px;
+  text-justify: inherit;
+  margin: 2px 2px 2px 2px;
+  text-align: left;
+  padding: 4px 10px 4px 10px;
+  text-transform: capitalize;
+}
+
+.buttons {
+  border-radius: 5px;
+  border-width: 1px;
+  letter-spacing: 1px;
+  text-justify: inherit;
+  margin: 2px 2px 2px 2px;
+  padding: 4px 20px 4px 20px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.inputs {
+  border-radius: 5px;
+  border-width: 1px;
+  letter-spacing: 1px;
+  text-justify: inherit;
+  margin: 2px 2px 2px 2px;
+  text-align: left;
+  padding: 4px 10px 4px 10px;
+  text-transform: none;
+}
+
+.btn-danger {
+  border-color: rgb(255, 83, 83);
+  background-color: rgb(255, 83, 83);
+  color: rgb(238, 236, 236);
+}
+
+.btn-info {
+  border-color: rgb(115, 153, 179);
+  background-color: rgb(115, 153, 179);
+  color: rgb(238, 236, 236);
+}
+
+.btn-success {
+  border-color: rgb(122, 189, 144);
+  background-color: rgb(122, 189, 144);
+  color: rgb(238, 236, 236);
+}
+
+.btn-green {
+  border-color: rgb(124, 190, 178);
+  background-color: rgb(124, 190, 178);
+  color: rgb(238, 236, 236);
+}
+
+.btn-warning {
+  border-color: rgb(190, 179, 81);
+  background-color: rgb(190, 179, 81);
+  color: rgb(238, 236, 236);
+}
+
+.btn-neutral {
+  border-color: rgb(182, 182, 182);
+  background-color: rgb(182, 182, 182);
+  color: rgb(238, 236, 236);
+}
+
+.btn-neutral-clear {
+  border-color: rgb(214, 213, 213);
+  background-color: rgb(214, 213, 213);
+  color: rgb(131, 131, 131);
+}
+
+/*# sourceMappingURL=Buttons.css.map */
