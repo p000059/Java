@@ -1,10 +1,12 @@
 package ic.model.entity;
 
 import ic.model.superclass.Common;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -2,6 +2,7 @@ package ic.validations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,46 +23,50 @@ public class PartValidation implements IpartValidation {
 
 	@Autowired
 	private PartRepository partRepository;
-	
+
 	private Part searchPart(Part part) {
 
 		return this.partRepository.findById(part.getId()).get();
 	}
 
 	private Part convertDTOtoObject(PartDTO partDTO) {
-		
+
 		Part objectPart = new Part();
-		
+
 		BeanUtils.copyProperties(partDTO, objectPart);
-		
+
 		return objectPart;
 	}
-	
+
 	@SuppressWarnings("unused")
 	private PartDTO convertObjecttoDTO(Part part) {
-		
+
 		PartDTO partDTO = new PartDTO();
-		
+
 		BeanUtils.copyProperties(part, partDTO);
-		
+
 		return partDTO;
 	}
-	
+
 	@Override
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access" })
 	public Part insert(PartDTO partDTO) {
-		
+
 		try {
 
 			Part objectPart = this.convertDTOtoObject(partDTO);
-			
-			if ((objectPart instanceof Part) && (this.searchPart(objectPart).getCode() != objectPart.getCode())) {
 
-				return this.ipartService.insert(objectPart);
+			Optional<Part> optionalPart = this.partRepository.findAll().stream()
+					.filter(object -> object.getCode().equals(objectPart.getCode())).findFirst();
+
+			if (optionalPart.isPresent()) {
+
+				return new PartNull().builder().code("already registered object code").build();
 
 			} else {
 
-				return new PartNull().builder().code("non-existent registration").build();
+				return this.ipartService.insert(objectPart);
+
 			}
 
 		} catch (Exception e) {
@@ -74,19 +79,19 @@ public class PartValidation implements IpartValidation {
 	@SuppressWarnings("static-access")
 	public Part update(PartDTO partDTO) {
 		try {
-			
+
 			Part objectPart = this.convertDTOtoObject(partDTO);
 
 			if ((objectPart instanceof Part) && (objectPart.getId() == this.searchPart(objectPart).getId())) {
 
-				return this.partRepository.searchByCode(objectPart.getCode());				
+				return this.partRepository.searchByCode(objectPart.getCode());
 
-			} else if(objectPart.getId() == null) {
+			} else if (objectPart.getId() == null) {
 
 				return new PartNull().builder().code("id null").build();
-				
+
 			} else {
-				
+
 				return new PartNull().builder().code("non-existing record").build();
 			}
 
@@ -98,13 +103,13 @@ public class PartValidation implements IpartValidation {
 
 	@Override
 	public List<Part> listParts() {
-		
+
 		try {
-			
+
 			return this.ipartService.listParts();
-			
+
 		} catch (Exception e) {
-			
+
 			return new ArrayList<Part>();
 		}
 	}
@@ -112,11 +117,11 @@ public class PartValidation implements IpartValidation {
 	@Override
 	@SuppressWarnings("static-access")
 	public Part delete(PartDTO partDTO) {
-		
+
 		try {
 
 			Part objectPart = this.convertDTOtoObject(partDTO);
-			
+
 			if ((objectPart instanceof Part) && (objectPart.getId() == this.searchPart(objectPart).getId())) {
 
 				this.partRepository.delete(objectPart);
@@ -137,19 +142,19 @@ public class PartValidation implements IpartValidation {
 	@Override
 	@SuppressWarnings("static-access")
 	public List<Part> listParts(String name) {
-		
+
 		try {
-			
+
 			return this.ipartService.listParts(name.trim().toUpperCase());
-			
+
 		} catch (Exception e) {
-			
+
 			Part objectPart = new Part().builder().code(e.getLocalizedMessage()).build();
-			
+
 			List<Part> listPart = new ArrayList<>();
-			
+
 			listPart.add(objectPart);
-			
+
 			return listPart;
 		}
 	}
