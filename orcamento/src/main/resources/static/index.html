@@ -10,54 +10,56 @@
 
 	<title>OS - Ordem de Serviço</title>
 
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="js/DateYear.js"></script>
-	<script type="text/javascript" src="js/dates.js"></script>
+	<script type="text/javascript" src="js/jquery-3.6.1.js" defer></script>
+	<script type="text/javascript" src="js/bootstrap/bootstrap.min.js" defer></script>
+	<script type="text/javascript" src="js/bootstrap/bootstrap.bundle.min.js" defer></script>
+	<script type="text/javascript" src="js/DateYear.js" defer></script>
+	<script type="text/javascript" src="js/dates.js" defer></script>
 
 	<link rel="stylesheet" href="css/module.css">
-	<link type="text/css" rel="stylesheet" href="css/Custon.css">
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="shortcut icon" href="img/82IT.ico" type="image/x-icon">
 
 </head>
 
 <body>
 	<header>
-		<div class="jumbotron text-center" style="margin-bottom:0">
-			<h1>Controle de Serviços</h1>
+		<div class="title-program">
+			<h1 style="margin-bottom:0">zete<span class="cZetec">c</span></h1>
+			<p class="ac">auto center</p>
 		</div>
 		<div class="background-menu">
-			<nav class="navbar navbar-expand-sm bg-opacity-100 navbar-light">
-				<a class="navbar-brand" href="pages/part.html" target="content-iframe">Ordem de Serviços</a>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<a class="navbar-brand" href="pages/home.html" target="content-iframe">Ordem de Serviços</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="collapsibleNavbar">
 					<ul class="navbar-nav">
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-								Abrir OS
+						<li class="nav-item">
+							<a class="nav-link" target="content-iframe" href="pages/create_part.html" id="navbardrop">
+								Nova O.S.
 							</a>
 							<div id="strings" class="dropdown-menu"></div>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-								Mostrar OS
+						<li class="nav-item">
+							<a class="nav-link" target="content-iframe" href="pages/list_parts.html" id="navbardrop">
+								Mostrar O.S.
 							</a>
 							<div id="numbers" class="dropdown-menu"></div>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						<li class="nav-item">
+							<a class="nav-link" target="content-iframe" href="pages/create_budget.html" id="navbardrop">
 								Orçamentos
 							</a>
-							<div id="arrays" class="dropdown-menu"></div>
+							<div id="arrays" target="content-iframe" class="dropdown-menu"></div>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						<li class="nav-item">
+							<a class="nav-link" target="content-iframe" href="pages/list_budgets.html" id="navbardrop">
 								Mostrar Orçamentos
 							</a>
 							<div id="basic-html" class="dropdown-menu"></div>
-						</li>						
+						</li>
 					</ul>
 				</div>
 			</nav>

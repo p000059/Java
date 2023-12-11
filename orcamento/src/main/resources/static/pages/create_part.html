@@ -1,0 +1,71 @@
+<form id="formRegisterUser">
+	<div class="row">
+		<div class="col">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Codigo:</span>
+				</div>
+				<input id="code" type="text" class="form-control" placeholder="informe o código da peça"
+					required="required">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Nome:</span>
+				</div>
+				<input id="name" type="text" class="form-control" placeholder="Informe o nome da peça">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Descrição:</span>
+				</div>
+				<textarea class="form-control" id="description" rows="3"></textarea>
+
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Valor:</span>
+				</div>
+				<input id="value" type="number" class="form-control">
+			</div>
+			<div class="input-group mb-3">
+				<div class="btn-group">
+					<button type="button" class="btn btn-success" id="execute">Cadastrar</button>
+					<button type="button" class="btn btn-info" id="clear">Limpar Campos</button>
+					<button id="button_modal_confirm" class="btn btn-danger" type="button">Confirm?</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modal element -->
+	<div id="modal_confirm" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div id="modal_confirm_header" class="modal-header alert-danger text-danger">
+					<h5 class="modal-title">Confirme exclusão</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div id="modal_confirm_body" class="modal-body">
+					<p>Modal body text goes here.</p>
+				</div>
+				<div id="div_actions" class="modal-footer">
+					<button data-action="1" type="button" class="btn btn-danger">Excluir</button>
+					<button data-action="0" type="button" class="btn btn-secondary opacity-50"
+						data-bs-dismiss="modal">Cancelar</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<label class="labels" id="result"></label>
+	</div>
+	</div>
+</form>
+<div id="result">
+
+</div>
+
+<script type="text/javascript" src="../js/part/part.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js" defer></script>
+<link href="../css/bootstrap.min.css" rel="stylesheet">

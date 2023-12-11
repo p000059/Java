@@ -1,62 +1,69 @@
-*{
-    margin: 0;
+* {
+	margin: 0;
 }
 
-body{
-    font-family: 'Nunito Sans','sans-serif';
-    background-color: aliceblue;
+@font-face {
+    font-family: 'Rostave Personal Use';
+    src: url("../font/Rostave.otf") format("otf");
+    font-weight: normal; 
+    font-style: normal; 
 }
 
-.header{
-    background-color: rgb(247, 7, 7);
-    padding: 30px 50px;
-    color: aliceblue;
-    text-align: center;
+body {
+	font-family: 'Nunito Sans', 'sans-serif';
+	background-color: aliceblue;
 }
 
-.main{
-    padding: 30px 50px;
+.header {
+	background-color: rgb(247, 7, 7);
+	padding: 20px 50px;
+	color: aliceblue;
+	text-align: center;
 }
 
-.card{
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-top: 15px;
-    border-radius: 5px;
+.main {
+	padding: 30px 50px;
 }
 
-.lineInput{
-    display: grid;
-    margin-bottom: 10px;
+.card {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 20px;
+	margin-top: 15px;
+	border-radius: 5px;
 }
 
-input{
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    outline: 10px;
+.lineInput {
+	display: grid;
+	margin-bottom: 10px;
 }
 
-.buttonCheck{
-    border: 0px;
-    padding: 10px;
-    outline: 0;
-    background-color: rgb(255, 0, 0);
-    color: #fff;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: all ease 0.3s;
+input {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	outline: 10px;
 }
 
-button:hover{
-    background-color: rgb(233, 81, 81);
+.buttonCheck {
+	border: 0px;
+	padding: 10px;
+	outline: 0;
+	background-color: rgb(255, 0, 0);
+	color: #fff;
+	border-radius: 4px;
+	font-weight: bold;
+	transition: all ease 0.3s;
 }
 
-table{
-    border-collapse: collapse;
-    /* border: 1px solid #ccc; */
-    width: 100%;
+button:hover {
+	background-color: rgb(233, 81, 81);
+}
+
+table {
+	border-collapse: collapse;
+	/* border: 1px solid #ccc; */
+	width: 100%;
 }
 
 /* /* table th{
@@ -68,11 +75,16 @@ table{
     text-align: left;
 } */
 
-table td img{
-    width: 20px;
+table td img {
+	width: 20px;
 
 }
 
-.center{
-    text-align: center;
+.center {
+	text-align: center;
+}
+
+.title-program {
+	font-family: 'Rostave Personal Use', 'Calibri';
+	background-color: aliceblue;
 }

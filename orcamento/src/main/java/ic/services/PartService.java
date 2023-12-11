@@ -18,6 +18,7 @@ public class PartService implements IpartService {
 	@Override
 	public Part insert(Part part) {
 
+		part.setStatus(true);
 		return this.partRepository.save(part);
 	}
 

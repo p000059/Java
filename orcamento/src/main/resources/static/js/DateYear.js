@@ -8,5 +8,5 @@ function addZero(numero){
 (function(){
     let date = new Date()
     let small = (addZero(date.getDate().toString()) + "/" + (addZero(date.getMonth()+1).toString()) + "/" + date.getFullYear());
-    document.querySelector('#year').innerHTML = `Guimba - ${small}`
+    document.querySelector('#year').innerHTML = `ZETEC - ${small}`
 })()
