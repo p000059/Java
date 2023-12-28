@@ -1,46 +1,48 @@
 let execute = document.querySelector('#execute')
 execute.addEventListener('click', (event) => registerPart(event))
 
-let clear = document.querySelector('#clear')
+let clear = document.querySelector('#clear-fields')
 clear.addEventListener('click', (event) => clearFields(event))
 
 function registerPart(event) {
 
 	event.preventDefault()
 	event.stopPropagation()
+	
+	let code = ""
+	let name = ""
+	let description = ""
+	let value = 0
 
-	clearFields()
+	code = document.querySelector('#code').value
+	name = document.querySelector('#name').value
+	description = document.querySelector('#description').value
+	value = document.querySelector('#value').value
 
-	let code = document.querySelector('#code').value
-	let name = document.querySelector('#name').value
-	let description = document.querySelector('#description').value
-	let value = document.querySelector('#value').value
-
-	let codeCapitalize = code[0].toUpperCase() + code.substring(1)
-	let nameCapitalize = name[0].toUpperCase() + name.substring(1)
-	let descriptionLowerCase = description.toLowerCase()
-
+	let codeCapitalize = code.toUpperCase()
+	
 	let url = '../insertpart';
 
 	let data = {
 		code: codeCapitalize,
-		name: nameCapitalize,
-		description: descriptionLowerCase,
+		name: name,
+		description: description,
 		value: value
 	};
 
 	makeFetchPostRequest(url, data)
 
 	createLabel(document.querySelector('#result').innerHTML = data)
+	closeModal()
 
 }
 
 function clearFields() {
 
-	document.querySelector('#code').innerHTML = ''
-	document.querySelector('#name').innerHTML = ''
-	document.querySelector('#description').innerHTML = ''
-	document.querySelector('#value').innerHTML = ''
+	document.querySelector('#code').value = ''
+	document.querySelector('#name').value = ''
+	document.querySelector('#description').value = ''
+	document.querySelector('#value').value = ''
 }
 
 function createLabel(object) {
@@ -48,6 +50,12 @@ function createLabel(object) {
 	label.className = 'labels'
 	label.textContent = object
 	return label
+}
+
+function closeModal() {
+	
+	let modal = document.querySelector('#modal-confirm')
+	modal.style.display = 'none'	
 }
 
 function makeFetchPostRequest(url, data) {

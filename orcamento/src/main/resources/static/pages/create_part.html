@@ -1,65 +1,78 @@
-<form id="formRegisterUser">
+<!DOCTYPE html>
+<html>
 
-	<div class="form-row">
-		<div class="form-group col-md-8">
-			<label for="name">Nome:</label>
-			<input name="name" type="text" class="form-control" id="name" placeholder="digite o nome da peça"
-				autocomplete="on">
-		</div>
-		<div class="form-group col-md-4">
-			<label for="code">Codigo:</label>
-			<input name="code" type="text" class="form-control" id="code" placeholder="digite o código da peça"
-				autocomplete="on">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="description">Descrição:</label>
-		<textarea name="description" type="text" class="form-control" id="description"
-			placeholder="descreva a peça em detalhes" rows="4"></textarea>
-	</div>
-	<div class="form-row">
-		<div class="input-group mb-3 col-md-8">
-			<div class="input-group-prepend">
-				<span class="input-group-text">Preço:</span>
-			</div>
-			<input id="value" type="number" class="form-control" autocomplete="off">
-		</div>
-		<div class="form-group col-md-4">
-			<div>
-				<button type="button" class="btn btn-success" id="execute" data-toggle="modal"
-					data-target="#modal-confirm">Cadastrar</button>
-				<button type="button" class="btn btn-secondary" id="clear">Limpar Campos</button>
-			</div>
-		</div>
-	</div>
-</form>
-<!-- Modal -->
-<div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Confirmar Informações</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				Para revisar as informações clique em "Editar" e se estiver tudo certo para gravar, basta clicar em
-				"Salvar".
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Editar</button>
-				<button type="button" class="btn btn-primary">Salvar</button>
-			</div>
-		</div>
-	</div>
-</div>
-<div id="result">
+<head>
+	<title>Cadastrar Peça</title>
+	<script type="text/javascript" src="../js/part/part.js" defer></script>
+	<script type="text/javascript" src="../js/jquery.js" defer></script>
+	<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js" defer></script>
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
 
-</div>
+</head>
 
-<script type="text/javascript" src="../js/part/part.js"></script>
-<script type="text/javascript" src="../js/jquery.js"></script>
-<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js" defer></script>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<body>
+	<form id="formRegisterUser">
+
+		<div class="form-row">
+			<div class="form-group col-md-8">
+				<label for="name">Nome:</label>
+				<input name="name" type="text" class="form-control" id="name" placeholder="digite o nome da peça"
+					autocomplete="on">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="code">Codigo:</label>
+				<input name="code" type="text" class="form-control" id="code" placeholder="digite o código da peça"
+					autocomplete="on">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="description">Descrição:</label>
+			<textarea name="description" type="text" class="form-control" id="description"
+				placeholder="descreva a peça em detalhes" rows="4"></textarea>
+		</div>
+		<div class="form-row">
+			<div class="input-group mb-3 col-md-8">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Preço:</span>
+				</div>
+				<input id="value" type="number" class="form-control" autocomplete="off">
+			</div>
+			<div class="form-group col-md-4">
+				<div>
+					<button type="button" class="btn btn-success" data-toggle="modal"
+						data-target="#modal-confirm">Cadastrar</button>
+					<button type="button" class="btn btn-secondary" id="clear-fields">Limpar Campos</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- Modal -->
+	<div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Confirmar Informações</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Para revisar as informações clique em "Editar" e se estiver tudo certo para gravar, basta clicar em
+					"Salvar".
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Editar</button>
+					<button type="button" class="btn btn-primary" id="execute">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="result">
+
+	</div>
+
+</body>
+
+</html>
