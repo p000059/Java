@@ -1,0 +1,13 @@
+.upper{
+	text-transform: uppercase;
+}
+
+textarea[rows="5"]{
+	resize: none;
+}
+
+.radio label, 
+.radio input, 
+.radio span {
+	display: inline-block;
+}

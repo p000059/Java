@@ -1,14 +1,17 @@
-document.addEventListener('DOMContentLoaded', function () {
 
-	let registerButton = document.querySelector('#register-button');
-	let closeConfirmationButton = document.querySelector('#close-confirmation-button');
-	let closeModalButton = document.querySelector('#close-modal-button');
+let varDescription = document.querySelector('#description')
+varDescription.setAttribute("rows", "5");
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	let registerButton = document.querySelector('#register-button')
+	let closeConfirmationButton = document.querySelector('#close-confirmation-button')
+	let closeModalButton = document.querySelector('#close-modal-button')
 	let clearFields = document.querySelector('#clear-fields')
 
-
-	registerButton.addEventListener('click', register);
-	closeConfirmationButton.addEventListener('click', closeConfirmationModal);
-	closeModalButton.addEventListener('click', closeConfirmationModal);
+	registerButton.addEventListener('click', register)
+	closeConfirmationButton.addEventListener('click', closeConfirmationModal)
+	closeModalButton.addEventListener('click', closeConfirmationModal)
 	clearFields.addEventListener('click', clearField)
 });
 
@@ -21,41 +24,59 @@ function clearField() {
 }
 
 function register() {
-	
-	let code = document.querySelector('#code').value;
-	let type = document.querySelector('#type').value;
-	let description = document.querySelector('#description').value;
+
+	let code = document.querySelector('#code').value
+	let type = ''
+	let description = document.querySelector('#description').value
+	let preventiveMaintenance = document.querySelector("#preventive_maintenance");
+	let correctiveMaintenance = document.querySelector("#corrective_maintenance");
+	let preventiveCorrectiveMaintenance = document.querySelector("#preventive_corrective_maintenance");
 
 	let codeCapitalize = code.toUpperCase()
+	codeCapitalize.padStart(10, "0")
+	codeCapitalize.trim()
 
-	let url = 'http://localhost:8089/os/insertOS'
+	if (preventiveMaintenance.checked) {
+		
+		type = preventiveMaintenance.value;
+		
+	} else if (correctiveMaintenance.checked) {
+		
+		type = correctiveMaintenance.value;
+		
+	} else {
+		
+		type = preventiveCorrectiveMaintenance.value;
+	}
+
+	let url = '../insertOS'
 
 	let data = {
 		code: codeCapitalize,
-		type: type,		
+		type: type,
 		description: description
 	}
 
-	
 
-	document.querySelector('#confirmation-message').innerHTML = makeFetchPostRequest(url, data) 
+
+	document.querySelector('#confirmation-message').innerHTML = makeFetchPostRequest(url, data)
 	//`Codigo: ${data.code} <br/>Tipo: ${data.type} <br/>Descrição: ${data.description}`
 
 	showConfirmationModal();
 }
 
 function showConfirmationModal() {
-	let modal = document.querySelector('#confirmation-modal');
-	modal.style.display = 'block';
-	modal.classList.add('show');
-	document.body.style.overflow = 'hidden';
+	let modal = document.querySelector('#confirmation-modal')
+	modal.style.display = 'block'
+	modal.classList.add('show')
+	document.body.style.overflow = 'hidden'
 }
 
 function closeConfirmationModal() {
-	let modal = document.querySelector('#confirmation-modal');
-	modal.style.display = 'none';
-	modal.classList.remove('show');
-	document.body.style.overflow = '';
+	let modal = document.querySelector('#confirmation-modal')
+	modal.style.display = 'none'
+	modal.classList.remove('show')
+	document.body.style.overflow = ''
 }
 
 function makeFetchPostRequest(url, data) {
